@@ -1,0 +1,357 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ tokens */
+:root {
+  /* Brand — deep oxblood burgundy + white */
+  --maroon: #331119;
+  --maroon-deep: #250b11;
+  --maroon-soft: #4d1f2b;
+  --maroon-tint: #f4eded;
+
+  --ink: #1b1418;
+  --body-color: #574c51;
+  --paper: #ffffff;
+  --mist: #f7f5f4;
+  --line: #e7e1e0;
+  --line-dark: rgba(255, 255, 255, 0.16);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --color-maroon: var(--maroon);
+  --color-maroon-deep: var(--maroon-deep);
+  --color-maroon-soft: var(--maroon-soft);
+  --color-maroon-tint: var(--maroon-tint);
+  --color-ink: var(--ink);
+  --color-body: var(--body-color);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-line: var(--line);
+  --color-line-dark: var(--line-dark);
+
+  --font-serif: var(--font-fraunces), "Georgia", serif;
+  --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ------------------------------------------------------------------ base */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--maroon);
+  color: #fff;
+}
+
+/* Lock scroll while the preloader is active */
+html.coe-loading {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------ type */
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 380;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.display-1 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 360;
+  font-size: clamp(2.75rem, 6.2vw, 5.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.display-2 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 370;
+  font-size: clamp(2.125rem, 4vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.display-3 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 390;
+  font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+}
+
+.display-4 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+}
+
+.eyebrow {
+  font-family: var(--font-inter), Arial, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--maroon);
+}
+
+.eyebrow--light {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.lede {
+  font-size: clamp(1.125rem, 1.5vw, 1.3125rem);
+  line-height: 1.6;
+  letter-spacing: -0.012em;
+  color: var(--body-color);
+}
+
+/* ------------------------------------------------------------------ layout */
+.container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1392px;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .container-site {
+    padding-inline: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-site {
+    padding-inline: 72px;
+  }
+}
+
+.hairline {
+  border-top: 1px solid var(--line);
+}
+
+/* ------------------------------------------------------------------ links */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.45s var(--ease-out-expo);
+  padding-bottom: 2px;
+}
+
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* circle-arrow call to action, Harvard-style */
+.btn-circle {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+
+.btn-circle .btn-circle__disc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  flex: none;
+  border-radius: 9999px;
+  border: 1px solid currentColor;
+  transition: background-color 0.4s var(--ease-out-expo),
+    border-color 0.4s var(--ease-out-expo);
+}
+
+.btn-circle .btn-circle__disc svg {
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.btn-circle:hover .btn-circle__disc {
+  background: var(--maroon);
+  border-color: var(--maroon);
+  color: #fff;
+}
+
+.btn-circle:hover .btn-circle__disc svg {
+  transform: translateX(3px);
+}
+
+.btn-circle--filled .btn-circle__disc {
+  background: var(--maroon);
+  border-color: var(--maroon);
+  color: #fff;
+}
+
+.btn-circle--filled:hover .btn-circle__disc {
+  background: var(--maroon-deep);
+  border-color: var(--maroon-deep);
+}
+
+.btn-circle--light:hover .btn-circle__disc {
+  background: #fff;
+  border-color: #fff;
+  color: var(--maroon);
+}
+
+/* solid rectangular button */
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.75rem;
+  background: var(--maroon);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background-color 0.35s var(--ease-out-expo);
+}
+
+.btn-solid:hover {
+  background: var(--maroon-deep);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.75rem;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: border-color 0.35s var(--ease-out-expo),
+    background-color 0.35s var(--ease-out-expo), color 0.35s var(--ease-out-expo);
+}
+
+.btn-outline:hover {
+  border-color: var(--maroon);
+  color: var(--maroon);
+}
+
+.btn-outline--light {
+  border-color: var(--line-dark);
+  color: #fff;
+}
+
+.btn-outline--light:hover {
+  border-color: #fff;
+  background: #fff;
+  color: var(--maroon);
+}
+
+/* ------------------------------------------------------------------ imagery */
+.img-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--mist);
+}
+
+.img-frame img {
+  will-change: transform;
+}
+
+/* soft white fade at the bottom of hero imagery, Harvard-style */
+.fade-bottom::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 34%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+  pointer-events: none;
+}
+
+.tint-maroon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(37, 11, 17, 0.08),
+    rgba(37, 11, 17, 0.38)
+  );
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ misc */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 550;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--body-color);
+}
+
+.status-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--maroon);
+}
+
+/* numbered editorial lists */
+.num-index {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 340;
+  font-size: 0.9375rem;
+  color: var(--maroon);
+  letter-spacing: 0.02em;
+}
+
+/* reveal helpers — elements start hidden only when JS is present AND the
+   visitor has not requested reduced motion (html.coe-anim is set by an
+   inline script before first paint). */
+html.coe-anim [data-reveal],
+html.coe-anim [data-reveal-group] > * {
+  opacity: 0;
+}
+
+/* the preloader overlay only exists for animated, JS-enabled visits */
+.coe-preloader {
+  display: none;
+}
+
+html.coe-anim .coe-preloader {
+  display: flex;
+}
