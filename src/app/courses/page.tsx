@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/sections/PageHero";
-import ImageBanner from "@/components/sections/ImageBanner";
 import CourseFinder from "@/components/sections/CourseFinder";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal from "@/components/anim/Reveal";
@@ -29,12 +28,6 @@ export default function CoursesPage() {
         lede="Explore practical learning in artificial intelligence, coding, enterprise, media, the arts, science, mathematics and citizenship. Each programme is designed to move beyond passive instruction, giving students opportunities to question, practise, create and present."
       />
 
-      <ImageBanner
-        src="/images/hero-courses.jpg"
-        alt="A student's notebook and study materials on a white desk"
-        priority
-      />
-
       <section className="container-site py-20 md:py-28">
         <Reveal className="mb-14 max-w-3xl">
           <p className="eyebrow mb-6">Course finder</p>
@@ -46,8 +39,7 @@ export default function CoursesPage() {
             introductions for those beginning to explore.
           </p>
           <p className="mt-5 text-body">
-            Compare programmes by subject, level, experience and application
-            status, or search by keyword.
+            Filter programmes by level, or search by subject, age or keyword.
           </p>
         </Reveal>
         <CourseFinder />

@@ -51,27 +51,18 @@ function FilterGroup({
 }
 
 /**
- * Interactive course finder: filter the programme catalogue by subject,
- * level, age group and status, with free-text search. Results animate in
- * with a quiet GSAP stagger whenever the filters change.
+ * Interactive course finder: a single Level filter alongside free-text
+ * search. Subject and status filters were removed at the client's request —
+ * search still covers subject, age and keywords, so nothing became
+ * unreachable. Results animate in with a quiet GSAP stagger on change.
  */
 export default function CourseFinder({ preview = false }: { preview?: boolean }) {
-  const [category, setCategory] = useState(ALL);
   const [level, setLevel] = useState(ALL);
-  const [status, setStatus] = useState(ALL);
   const [query, setQuery] = useState("");
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const categories = useMemo(
-    () => uniq(finderCourses.map((c) => c.finder!.categoryLabel)),
-    [],
-  );
   const levels = useMemo(
     () => uniq(finderCourses.map((c) => c.finder!.level)),
-    [],
-  );
-  const statuses = useMemo(
-    () => uniq(finderCourses.map((c) => c.finder!.status)),
     [],
   );
 
@@ -79,9 +70,7 @@ export default function CourseFinder({ preview = false }: { preview?: boolean })
     const q = query.trim().toLowerCase();
     return finderCourses.filter((c) => {
       const f = c.finder!;
-      if (category !== ALL && f.categoryLabel !== category) return false;
       if (level !== ALL && f.level !== level) return false;
-      if (status !== ALL && f.status !== status) return false;
       if (q) {
         const haystack = [
           c.title,
@@ -97,7 +86,7 @@ export default function CourseFinder({ preview = false }: { preview?: boolean })
       }
       return true;
     });
-  }, [category, level, status, query]);
+  }, [level, query]);
 
   const results = preview ? allResults.slice(0, 3) : allResults;
   const resultsKey = results.map((r) => r.slug).join("|");
@@ -127,30 +116,12 @@ export default function CourseFinder({ preview = false }: { preview?: boolean })
       {/* Controls */}
       <div className="border-y border-line py-10">
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:gap-16">
-          <div className="flex flex-col gap-7">
-            <FilterGroup
-              label="Subject"
-              options={categories}
-              value={category}
-              onChange={setCategory}
-            />
-            {!preview ? (
-              <div className="flex flex-col gap-7 sm:flex-row sm:gap-12">
-                <FilterGroup
-                  label="Level"
-                  options={levels}
-                  value={level}
-                  onChange={setLevel}
-                />
-                <FilterGroup
-                  label="Status"
-                  options={statuses}
-                  value={status}
-                  onChange={setStatus}
-                />
-              </div>
-            ) : null}
-          </div>
+          <FilterGroup
+            label="Level"
+            options={levels}
+            value={level}
+            onChange={setLevel}
+          />
           <div className="lg:w-72">
             <label htmlFor="course-search" className="eyebrow !text-[0.625rem] mb-3 block">
               Search
@@ -186,8 +157,8 @@ export default function CourseFinder({ preview = false }: { preview?: boolean })
           </div>
           {preview ? (
             <p className="mt-14 border-t border-line pt-8 text-[0.9375rem] text-body">
-              Compare all {finderCourses.length} programmes by subject, level,
-              age and status in the{" "}
+              Browse all {finderCourses.length} programmes by level, subject
+              and age in the{" "}
               <Link
                 href="/courses"
                 className="link-underline font-medium text-maroon"
@@ -204,14 +175,12 @@ export default function CourseFinder({ preview = false }: { preview?: boolean })
           <button
             type="button"
             onClick={() => {
-              setCategory(ALL);
               setLevel(ALL);
-              setStatus(ALL);
               setQuery("");
             }}
             className="link-underline mt-4 font-medium text-maroon"
           >
-            Clear all filters
+            Clear search and filter
           </button>
         </div>
       )}
