@@ -36,115 +36,56 @@ export default function HomePage() {
   return (
     <>
       {/* ---------------------------------------------------------- hero */}
-      <section className="relative overflow-hidden container-site pt-32 pb-20 md:pt-40 md:pb-28 lg:pt-44 lg:pb-32">
+      {/* Type-only opening — the client asked for the hero imagery to come out
+          and the words to carry the page on their own. */}
+      <section className="relative overflow-hidden container-site pt-36 pb-20 md:pt-48 md:pb-28 lg:pt-52 lg:pb-32">
         {/* Subtle decorative background light glow */}
         <div className="pointer-events-none absolute right-0 top-1/4 -z-10 h-96 w-96 rounded-full bg-maroon/5 blur-3xl" />
-        
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-12 lg:items-center">
-          {/* Left Column - Main Copy & CTAs */}
-          <Reveal group immediate className="lg:col-span-6 xl:col-span-6">
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-maroon/15 bg-maroon-tint/50 px-4 py-1.5 text-xs font-semibold tracking-wider text-maroon uppercase mb-7">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-maroon opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-maroon" />
-              </span>
-              Centre of Excellence at Ananda College
+
+        <Reveal group immediate>
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-maroon/15 bg-maroon-tint/50 px-4 py-1.5 text-xs font-semibold tracking-wider text-maroon uppercase mb-8">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-maroon opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-maroon" />
+            </span>
+            Centre of Excellence at Ananda College
+          </div>
+
+          <h1 className="display-1 max-w-5xl text-ink">
+            Where knowledge becomes capability.
+          </h1>
+
+          <p className="lede mt-8 max-w-2xl text-body">
+            The Centre of Excellence brings science, technology,
+            engineering, the arts and mathematics together through
+            practical, project-based learning. Here, students investigate
+            real questions, develop useful skills and turn ideas into work
+            they can test, improve and share.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <ArrowLink href="/about" variant="filled">
+              Explore the Centre
+            </ArrowLink>
+            <ArrowLink href="/courses">View courses</ArrowLink>
+          </div>
+
+          {/* Micro stats / key features strip */}
+          <div className="mt-16 grid max-w-3xl grid-cols-3 gap-6 border-t border-line pt-8 md:mt-20">
+            <div>
+              <span className="font-display text-3xl text-maroon md:text-4xl">10</span>
+              <p className="mt-1.5 text-xs font-medium text-body/80 uppercase tracking-wider">Learning Centres</p>
             </div>
-            
-            <h1 className="display-1 text-ink">
-              Where knowledge becomes capability.
-            </h1>
-            
-            <p className="lede mt-7 text-body">
-              The Centre of Excellence brings science, technology,
-              engineering, the arts and mathematics together through
-              practical, project-based learning. Here, students investigate
-              real questions, develop useful skills and turn ideas into work
-              they can test, improve and share.
-            </p>
-            
-            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <ArrowLink href="/about" variant="filled">
-                Explore the Centre
-              </ArrowLink>
-              <ArrowLink href="/courses">View courses</ArrowLink>
+            <div>
+              <span className="font-display text-3xl text-maroon md:text-4xl">STEAM</span>
+              <p className="mt-1.5 text-xs font-medium text-body/80 uppercase tracking-wider">Integrated Approach</p>
             </div>
-
-            {/* Micro stats / key features strip */}
-            <div className="mt-12 grid grid-cols-3 gap-6 border-t border-line pt-8">
-              <div>
-                <span className="font-serif text-2xl font-light text-maroon md:text-3xl">10</span>
-                <p className="mt-1 text-xs font-medium text-body/80 uppercase tracking-wider">Learning Centres</p>
-              </div>
-              <div>
-                <span className="font-serif text-2xl font-light text-maroon md:text-3xl">STEAM</span>
-                <p className="mt-1 text-xs font-medium text-body/80 uppercase tracking-wider">Integrated Approach</p>
-              </div>
-              <div>
-                <span className="font-serif text-2xl font-light text-maroon md:text-3xl">100%</span>
-                <p className="mt-1 text-xs font-medium text-body/80 uppercase tracking-wider">Project-Based</p>
-              </div>
+            <div>
+              <span className="font-display text-3xl text-maroon md:text-4xl">100%</span>
+              <p className="mt-1.5 text-xs font-medium text-body/80 uppercase tracking-wider">Project-Based</p>
             </div>
-          </Reveal>
-
-          {/* Right Column - Creative Multi-Layered Interactive Hero Showcase */}
-          <Reveal immediate className="relative lg:col-span-6 xl:col-span-6 lg:pl-4">
-            <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-              
-              {/* Background Architectural Framing & Accent Frame */}
-              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-maroon-tint/80 via-mist to-transparent border border-maroon/10 -rotate-1 sm:-inset-4" />
-              
-              {/* Main Building Frame */}
-              <div className="group relative overflow-hidden rounded-2xl border border-line bg-paper shadow-xl transition-all duration-500 hover:shadow-2xl">
-                <Parallax className="img-frame aspect-[4/3] sm:aspect-[14/10] lg:aspect-[4/3]" amount={5}>
-                  <div className="absolute inset-0">
-                    <Image
-                      src="/images/hero-main.jpg"
-                      alt="The Ananda College main building with a Centre of Excellence banner"
-                      fill
-                      priority
-                      sizes="(min-width: 1024px) 45vw, 100vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                  </div>
-                </Parallax>
-
-
-              </div>
-
-              {/* Overlapping Secondary Active Showcase Card */}
-              <div className="group/card absolute -bottom-8 -left-4 z-20 w-3/5 sm:-bottom-10 sm:-left-6 sm:w-2/3 max-w-[280px]">
-                <div className="overflow-hidden rounded-xl border border-white/60 bg-paper p-2 shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-maroon/20">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
-                    <Image
-                      src="/images/hero-learning.jpg"
-                      alt="Students collaborating on electronics prototype"
-                      fill
-                      sizes="(min-width: 1024px) 25vw, 50vw"
-                      className="object-cover transition-transform duration-500 group-hover/card:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-maroon/60 via-transparent to-transparent" />
-                    <span className="absolute bottom-2 left-2.5 text-[0.7rem] font-semibold text-white tracking-wide uppercase">
-                      Hands-on Prototyping
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Interactive Discipline Tag Pill */}
-              <div className="absolute -top-6 -left-3 z-20 hidden sm:flex items-center gap-2 rounded-xl border border-line bg-paper/95 p-3 shadow-lg backdrop-blur-md">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-maroon text-white font-serif text-sm font-semibold">
-                  S
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-ink">STEAM Learning Ecosystem</div>
-                  <div className="text-[0.6875rem] text-body">10 Specialized Disciplines</div>
-                </div>
-              </div>
-
-            </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* ---------------------------------------------------------- intro */}

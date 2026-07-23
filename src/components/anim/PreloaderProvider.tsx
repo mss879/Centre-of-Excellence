@@ -22,9 +22,14 @@ const PreloaderContext = createContext<PreloaderState>({ ready: false });
 
 export const usePreloaderReady = () => useContext(PreloaderContext).ready;
 
-const MIN_SHOW_MS = 1500;
-const MAX_WAIT_MS = 4000;
-const REVISIT_SHOW_MS = 350;
+/* Hard ceiling from mount to the overlay being gone. Nothing may push past
+   this — an absolute timer force-finishes at the deadline regardless of what
+   is still in flight. The wait budget is whatever is left after the exit. */
+const TOTAL_BUDGET_MS = 2500;
+const EXIT_MS = 950; // length of the lift() sequence below
+const MAX_WAIT_MS = TOTAL_BUDGET_MS - EXIT_MS;
+const MIN_SHOW_MS = 600; // enough to read the mark, short enough not to drag
+const REVISIT_SHOW_MS = 300;
 
 /** Elements that should not take focus while the overlay covers them. */
 const inertTargets = () =>
@@ -78,11 +83,12 @@ export default function PreloaderProvider({
 
     /* If rAF is throttled (background tab), the exit tween can stall —
        force-complete rather than trapping the visitor behind the overlay. */
-    const hardKill = window.setTimeout(forceFinish, 3000);
+    const hardKill = window.setTimeout(forceFinish, EXIT_MS + 250);
 
+    /* Total below must stay within EXIT_MS: 0.22 + (0.32 - 0.12) + 0.5 = 0.92s */
     gsap.to(progress.current, {
       value: 100,
-      duration: 0.5,
+      duration: 0.22,
       ease: "power2.out",
       overwrite: "auto",
       onUpdate: renderCounter,
@@ -99,21 +105,21 @@ export default function PreloaderProvider({
         });
         tl.to([markRef.current, counterRef.current], {
           autoAlpha: 0,
-          y: -24,
-          duration: 0.55,
+          y: -18,
+          duration: 0.28,
           ease: "power3.in",
-          stagger: 0.06,
+          stagger: 0.04,
         })
           .to(
             barRef.current,
-            { autoAlpha: 0, duration: 0.3, ease: "power2.in" },
+            { autoAlpha: 0, duration: 0.22, ease: "power2.in" },
             "<",
           )
-          .to(overlayRef.current, {
-            yPercent: -100,
-            duration: 1,
-            ease: "power4.inOut",
-          });
+          .to(
+            overlayRef.current,
+            { yPercent: -100, duration: 0.5, ease: "power4.inOut" },
+            "-=0.12",
+          );
       },
     });
   }, [renderCounter, forceFinish]);
@@ -147,17 +153,23 @@ export default function PreloaderProvider({
       return () => window.clearTimeout(t);
     }
 
-    /* Track the assets the hero actually needs: images already in the
-       document (the hero renders under the overlay) plus webfonts. */
-    let total = 1; // window load
+    /* Wait only on what the hero itself needs — the webfonts plus any image
+       inside the first viewport (the hero renders under the overlay). The
+       window 'load' event is deliberately NOT used: it blocks on every
+       below-fold asset, which is what made this drag on. */
     let doneCount = 0;
+    const heroImages = Array.from(document.images)
+      .filter((img) => img.getBoundingClientRect().top < window.innerHeight)
+      .slice(0, 4);
+    const total = heroImages.length + 1; // + fonts
+
     const bump = () => {
       doneCount += 1;
       const target = Math.min(96, (doneCount / total) * 96);
       if (target > progress.current.value) {
         gsap.to(progress.current, {
           value: target,
-          duration: 0.6,
+          duration: 0.35,
           ease: "power2.out",
           overwrite: "auto",
           onUpdate: renderCounter,
@@ -169,9 +181,7 @@ export default function PreloaderProvider({
       }
     };
 
-    const images = Array.from(document.images).slice(0, 10);
-    total += images.length + 1; // + fonts
-    images.forEach((img) => {
+    heroImages.forEach((img) => {
       if (img.complete) bump();
       else {
         img.addEventListener("load", bump, { once: true });
@@ -181,16 +191,15 @@ export default function PreloaderProvider({
 
     document.fonts.ready.then(bump);
 
-    if (document.readyState === "complete") bump();
-    else window.addEventListener("load", bump, { once: true });
-
-    // Never trap the visitor if an asset stalls.
+    // Never trap the visitor if an asset stalls: lift in time to still finish
+    // the exit inside the budget, and hard-stop at the deadline regardless.
     const failsafe = window.setTimeout(lift, MAX_WAIT_MS);
+    const deadline = window.setTimeout(forceFinish, TOTAL_BUDGET_MS);
 
     // Idle creep so the counter always feels alive.
     creepTween.current = gsap.to(progress.current, {
       value: "+=14",
-      duration: 2.4,
+      duration: 1.3,
       ease: "power1.inOut",
       onUpdate: () => {
         progress.current.value = Math.min(progress.current.value, 90);
@@ -200,6 +209,7 @@ export default function PreloaderProvider({
 
     return () => {
       window.clearTimeout(failsafe);
+      window.clearTimeout(deadline);
       creepTween.current?.kill();
     };
   }, [lift, renderCounter, forceFinish]);
