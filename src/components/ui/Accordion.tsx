@@ -26,11 +26,14 @@ export interface AccordionEntry {
 export default function Accordion({
   items,
   numbered = false,
+  defaultOpen = null,
 }: {
   items: AccordionEntry[];
   numbered?: boolean;
+  /** Index of the row to expand on load — used to reveal the first step. */
+  defaultOpen?: number | null;
 }) {
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(defaultOpen);
   const ref = useRef<HTMLDivElement>(null);
   const baseId = useId();
 
