@@ -85,11 +85,11 @@ export const centres: Centre[] = [
   {
     id: "media-studio",
     index: "07",
-    name: "Media Studio",
+    name: "Sumathi Convergence Media Centre",
     tagline: "Create with purpose. Communicate with care.",
     description:
-      "The Media Studio introduces students to sound, video, editing, broadcasting and journalism. Students learn both production technique and the responsibility that comes with recording, representing and publishing.",
-    topics: ["Podcasting", "Video production", "Broadcasting", "Journalism", "Motion graphics"],
+      "A lean, software-defined studio where students move through sound, field production, editing, live multi-camera broadcasting and journalism as one stacked pathway. Students learn both production technique and the responsibility that comes with recording, representing and publishing — working towards a national vocational qualification.",
+    topics: ["Podcasting", "Mobile journalism", "Post-production", "Live broadcasting", "Journalism", "AI workflows"],
     image: "/images/centre-media.jpg",
     imageAlt: "Broadcast camera in the Media Studio",
     courseSlug: "media-communication",

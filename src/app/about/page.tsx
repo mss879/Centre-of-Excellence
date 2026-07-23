@@ -68,6 +68,50 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* national context */}
+      <section className="bg-mist">
+        <div className="container-site py-24 md:py-32">
+          <Reveal className="mb-14 max-w-3xl">
+            <p className="eyebrow mb-6">A national first</p>
+            <h2 className="display-2 text-ink">
+              Bringing STEAM to public education in Sri Lanka.
+            </h2>
+            <p className="lede mt-7">
+              STEAM education has gained ground in private institutions. The
+              Centre of Excellence is designed to introduce it to the public
+              school system, so that students from all backgrounds can reach
+              the same resources, tools and ways of learning.
+            </p>
+          </Reveal>
+          <Reveal group className="grid gap-12 md:grid-cols-3 md:gap-16">
+            <div className="border-t border-line pt-8">
+              <h3 className="display-4 text-ink">Endorsed by the Ministry of Education</h3>
+              <p className="mt-4 text-body">
+                The initiative carries the endorsement of Sri Lanka&rsquo;s
+                Ministry of Education, positioning the Centre as a model for
+                future educational reform rather than a single-school project.
+              </p>
+            </div>
+            <div className="border-t border-line pt-8">
+              <h3 className="display-4 text-ink">Ten specialised centres</h3>
+              <p className="mt-4 text-body">
+                Each centre is dedicated to a different aspect of practical
+                education and job readiness, bridging the gap between classroom
+                learning and the demands of professional work.
+              </p>
+            </div>
+            <div className="border-t border-line pt-8">
+              <h3 className="display-4 text-ink">Built for national impact</h3>
+              <p className="mt-4 text-body">
+                The Centre is intended as a platform for young people across Sri
+                Lanka, not only for Ananda College &mdash; an accelerator whose
+                approach other schools can follow.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* mission / vision */}
       <section className="bg-maroon text-white">
         <div className="container-site grid gap-14 py-24 md:grid-cols-2 md:gap-20 md:py-32">

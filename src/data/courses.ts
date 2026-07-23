@@ -19,8 +19,14 @@ export interface CourseSection {
 
 export interface OutlineItem {
   title: string;
+  /** Sequence label ("Phase 1 of 3 — Spark") shown above the title, so order is obvious. */
+  step?: string;
   meta?: string;
   body?: string;
+  /** Optional module/detail list shown when the outline row is expanded. */
+  points?: string[];
+  /** Key subjects, shown as chips on the closed row so the content is legible at a glance. */
+  topics?: string[];
 }
 
 export interface IntegrationItem {
@@ -150,8 +156,14 @@ export const courses: Course[] = [
       },
       {
         label: "Annual intake",
-        primary: "Selective cohort",
+        primary: "Selective cohort — 50+ AI innovators a year",
         secondary: "Based on a standardised aptitude assessment; final process to be confirmed",
+      },
+      {
+        label: "Curriculum",
+        primary: "Written by Dr Chulaka Gunasekara",
+        secondary:
+          "Senior Research Scientist, IBM Watson. Reviewed annually by a panel of enterprise partners and industry leaders",
       },
     ],
     objectives: {
@@ -169,27 +181,96 @@ export const courses: Course[] = [
     },
     outline: {
       heading: "Programme outline",
-      badges: ["Four phases", "Project-based learning", "Facilitation over lecturing"],
+      badges: ["Three phases across four terms", "Project-based learning", "Facilitation over lecturing"],
       items: [
         {
-          title: "Phase 1: Spark, exploration & foundations",
+          title: "Python, mathematics and the AI landscape",
+          step: "Phase 1 of 3 — Spark",
           meta: "Year 1, Term 1",
-          body: "The first term establishes the language of AI through AI foundations, Python, mathematics for machine learning, design thinking and communication. Practical laboratories introduce prompting, application programming interfaces and small experiments.",
+          topics: [
+            "AI foundations",
+            "Python",
+            "Maths for machine learning",
+            "Design thinking",
+            "Communication",
+            "Prompting & APIs",
+          ],
+          body: "Twelve weeks establishing the language of AI while introducing the human-centred 'spoke' skills alongside it. Laboratories introduce prompting, application programming interfaces and small experiments.",
+          points: [
+            "AI Foundations — what AI is and is not, key milestones, and the data-to-model-to-deployment pipeline.",
+            "Python Programming for AI I — Python, Jupyter, NumPy, pandas, plotting, files, APIs and basic SQL.",
+            "Mathematics for Machine Learning I — vectors, matrices, functions, gradients, and probability for intuition.",
+            "Introduction to Design Thinking — understanding user needs, generating ideas and testing solutions with empathy.",
+            "Communication I — building confidence in speaking and writing, up to a short talk on AI's impact on society.",
+            "Labs — the AI playground, prompting basics, and a first Python application calling a language-model API.",
+          ],
         },
         {
-          title: "Phase 2: Build, core skills & data science",
+          title: "Data science and classical machine learning",
+          step: "Phase 2 of 3 — Build",
           meta: "Year 1, Term 2",
-          body: "Students deepen their work in Python, data science, probability and statistics. Laboratories move through structured data practice and the first machine-learning models, building the habits of careful experimentation.",
+          topics: [
+            "pandas & scikit-learn",
+            "Probability & statistics",
+            "Regression & clustering",
+            "Neural network basics",
+            "PyTorch",
+            "Entrepreneurship",
+          ],
+          body: "Students deepen their work in Python and data science while entrepreneurship enters the curriculum. Laboratories move through structured data practice and the first machine-learning models, building the habits of careful experimentation.",
+          points: [
+            "Python Programming for AI II — pandas, NumPy, Matplotlib and scikit-learn for real data analysis.",
+            "Mathematics for Machine Learning II — distributions, mean and variance, and correlation.",
+            "Classical Machine Learning and Neural Networks — supervised and unsupervised learning, regression, clustering, and the basics of neurons, layers, training and overfitting.",
+            "Communication II — explaining data and technical concepts to both technical and non-technical audiences.",
+            "Entrepreneurship I — entrepreneurial mindset, opportunity identification, business models and value propositions.",
+            "Labs — sentiment analysis comparing classical ML against language models, a mini retrieval-augmented QA system, and a first PyTorch network.",
+          ],
         },
         {
-          title: "Phase 2: Build, advanced deep learning & AI workflows",
+          title: "Deep learning, AI workflows and ethics",
+          step: "Phase 2 of 3 — Build",
           meta: "Year 2, Term 1",
-          body: "Work advances into machine learning, neural networks and deep learning. Laboratories progress through model development, computer vision, natural-language processing and organised AI workflows.",
+          topics: [
+            "Computer vision",
+            "Natural language processing",
+            "Transformers & LLMs",
+            "MLOps",
+            "Ethical AI",
+            "AI agents",
+          ],
+          body: "The second term of the Build phase advances into deep learning and the operational practices that make models usable. Ethics is taught as a discipline in its own right rather than a closing caveat.",
+          points: [
+            "Deep Learning for Computer Vision — convolutional architectures and vision applications.",
+            "Deep Learning for NLP — sequence models, transformers and large language models.",
+            "DevOps, DataOps and MLOps — automating workflows, deploying models, and ensuring reproducibility, monitoring and governance.",
+            "Entrepreneurship II — customer discovery, advanced business models, funding and growth.",
+            "Ethical AI — risk, fairness, accountability and global governance approaches.",
+            "Labs — prompt engineering, tool calling, multimodal captioning, and deploying a first multi-step agent.",
+          ],
         },
         {
-          title: "Phase 3: Launch, specialisation & impact",
+          title: "Industry specialisation and the team capstone",
+          step: "Phase 3 of 3 — Launch",
           meta: "Year 2, Term 2",
-          body: "Students select an application pathway and work in teams of three or four. Over a planned twelve-week capstone, each team develops and tests a prototype, records how its model should be used, examines ethical effects and presents the work.",
+          topics: [
+            "Industry pathway",
+            "12-week capstone",
+            "Model cards",
+            "Ethical red-teaming",
+            "Startup pitch",
+            "Portfolio",
+          ],
+          body: "Students select an application pathway and work in teams of three or four with industry sponsors. Over a twelve-week capstone — proposal and stakeholder interviews, iterative prototyping with weekly mentor reviews, testing and ethical red-teaming, then pitch preparation — each team builds towards Industry Showcase Day.",
+          points: [
+            "Deliverable: a working prototype, deployed locally or in the cloud.",
+            "Deliverable: a model card documenting bias, limitations and metrics.",
+            "Deliverable: an ethical impact report outlining risks and mitigations.",
+            "Deliverable: a final pitch deck and demo to an industry audience.",
+            "Communication III — portfolio building, technical blogging, resume writing and mock interviews.",
+            "Entrepreneurship III — funding models, financial projections, go-to-market strategy and a demo-day pitch.",
+            "Labs — fine-tuning open language models with LoRA and QLoRA, multi-agent collaboration, and MCP tool integration.",
+          ],
         },
       ],
     },
@@ -243,14 +324,88 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "Proposed application pathways",
-        lead: "In Phase 3, each team selects one industry pathway for its capstone.",
+        lead: "In Phase 3, students specialise in domains aligned with their interests and with Sri Lanka's industry needs, then build a capstone within that field.",
         items: [
-          { title: "Healthcare" },
-          { title: "Finance and insurance" },
-          { title: "Smart manufacturing and tourism" },
-          { title: "Logistics and supply chains" },
-          { title: "Cybersecurity" },
-          { title: "Retail and marketing" },
+          {
+            title: "Healthcare AI",
+            body: "Diagnosis support, patient triage, hospital operations and medical imaging, with a strong emphasis on privacy and fairness in health data.",
+          },
+          {
+            title: "Finance and insurance AI",
+            body: "Fraud detection, credit risk, forecasting and insurance claims — including the ethics of bias in credit scoring and lending.",
+          },
+          {
+            title: "Smart manufacturing and tourism AI",
+            body: "Quality control, anomaly detection and demand forecasting for local industry, plus recommendation engines for tourism and hospitality.",
+          },
+          {
+            title: "Logistics and supply chain AI",
+            body: "Demand forecasting, route optimisation and inventory planning, applied to apparel exports, ports, e-commerce and retail.",
+          },
+          {
+            title: "Cybersecurity and surveillance AI",
+            body: "Video analytics, intrusion detection and digital threat detection — alongside the ethical and privacy trade-offs of surveillance.",
+          },
+          {
+            title: "Retail and marketing AI",
+            body: "Recommender systems, customer segmentation and generative AI for campaigns, balanced against cultural sensitivity in advertising.",
+          },
+        ],
+      },
+      {
+        heading: "How the Centre teaches",
+        lead: "The guiding philosophy is to guide, not just to teach — a deliberate shift away from rote instruction.",
+        items: [
+          {
+            title: "Facilitation over lecturing",
+            body: "Industry-experienced instructors act as technical mentors and product guides. Their role is not to deliver content that is already available online, but to unblock students, challenge design decisions and build resilience in problem-solving.",
+          },
+          {
+            title: "A Debug Squad",
+            body: "Computer science undergraduates support hands-on laboratory work, so students are rarely stuck for long.",
+          },
+          {
+            title: "Inquiry-based learning",
+            body: "Students are encouraged to ask the AI or read the documentation first, cultivating the self-reliance a modern engineering environment demands.",
+          },
+          {
+            title: "Blended delivery",
+            body: "Theory is studied online through curated world-class content; physical laboratory sessions are dedicated entirely to building — coding, debugging and prototyping.",
+          },
+          {
+            title: "Industry-led workshops",
+            body: "Visiting experts and alumni run exclusive sessions, from startup journeys to niche topics outside the standard curriculum such as generative art or AI in sport.",
+          },
+        ],
+      },
+      {
+        heading: "Partnerships and resources",
+        lead: "The curriculum is a living document, reviewed annually so every module uses a current tech stack.",
+        items: [
+          {
+            title: "Global technology alliances",
+            body: "Collaboration with global technology leaders including IBM, Google and Microsoft, giving students access to enterprise-grade tools and cloud platforms.",
+          },
+          {
+            title: "Local industry council",
+            body: "Sri Lankan industry leaders help co-create a curriculum that reflects local market needs alongside global trends.",
+          },
+          {
+            title: "Student software access",
+            body: "Global education grants are used to provide free access to the GitHub Student Developer Pack, Microsoft Azure and Google Cloud credits for model training, and Hugging Face repositories.",
+          },
+          {
+            title: "Infrastructure",
+            body: "Dedicated laptops, high-speed connectivity for cloud training, a learning management system with curated study material, and a modular collaborative space for group projects.",
+          },
+          {
+            title: "Competitions",
+            body: "An elite squad is trained to represent the College in local and global hackathons such as APICTA and the Microsoft Imagine Cup.",
+          },
+          {
+            title: "Career pathways",
+            body: "Top performers are offered internships with partner technology firms and, potentially, university sponsorships.",
+          },
         ],
       },
     ],
@@ -310,15 +465,20 @@ export const courses: Course[] = [
               title: "Final work",
               body: "The programme concludes with a team capstone: a working prototype, a model card, an ethical impact report and a public demonstration with a final pitch.",
             },
+            {
+              title: "Certification",
+              body: "Certificates are to be issued by the Centre of Excellence in collaboration with industry partners. Accreditation from a recognised foreign international body is being sought and is subject to final approval.",
+            },
           ],
         },
       ],
     },
     policy: {
-      title: "Academic continuity & exam freeze",
+      title: "Academic continuity, intellectual property & safeguards",
       body: [
-        "To protect performance in national examinations, the proposed curriculum features a blackout period before G.C.E. A/L examinations in which no new modules are introduced. Students may defer capstone defences until after their A/Ls.",
-        "All intellectual property created in the programme remains the property of the student creator.",
+        "To protect performance in national examinations, the proposed curriculum features a blackout period in the three months before G.C.E. A/L examinations in which no new modules are introduced. Students sitting examinations may defer their capstone defence until after their A/Ls.",
+        "All intellectual property created during capstones remains the property of the student creator, with the school or partner retaining only a non-exclusive licence for educational display.",
+        "All commercial exposure, intellectual property discussions and external partnerships operate under school governance, parental consent frameworks and age-appropriate safeguards — ensuring student welfare, equity and educational primacy.",
       ],
     },
     finder: {
@@ -375,7 +535,8 @@ export const courses: Course[] = [
     eyebrow: "STEAM, coding and making",
     tagline: "Design, code, connect and create.",
     intro: [
-      "This twelve-session workshop introduces students to the journey from identifying a useful problem to presenting an improved physical-computing project. Participants explore programming, electronics, Arduino, sensors, actuators and 3D design before bringing the pieces together in a final showcase.",
+      "This twelve-session workshop, developed with Rysera STEM, introduces students to the journey from identifying a useful problem to presenting an improved physical-computing project. Participants explore programming, electronics, Arduino, sensors, actuators and 3D design before bringing the pieces together in a final showcase.",
+      "The workshop begins long before any circuit is built or any code is written — it begins with a mindset. Children are taught to approach the world as problem-finders rather than only problem-solvers, because innovation does not have to be high-tech. Some of the most powerful ideas students arrive at are beautifully simple.",
     ],
     seoTitle: "STEAM Innovation Workshop with Arduino and 3D Design",
     metaDescription:
@@ -403,8 +564,9 @@ export const courses: Course[] = [
       },
       {
         label: "Language",
-        primary: "Teaching may be offered in a preferred language",
-        secondary: "Materials are planned in English",
+        primary: "Taught in the language a student is most comfortable in",
+        secondary:
+          "All material is in English, so students are consistently exposed to it in a meaningful, contextual way",
       },
       {
         label: "Final work",
@@ -431,66 +593,105 @@ export const courses: Course[] = [
       items: [
         {
           title: "Introduction to STEAM and innovation",
-          meta: "Session 1",
+          step: "Session 1 of 12",
           body: "How science, technology, engineering, the arts and mathematics combine around real problems — and what the workshop will build towards.",
         },
         {
           title: "Creativity, observation and needs-finding",
-          meta: "Session 2",
+          step: "Session 2 of 12",
           body: "Noticing needs, patterns and possibilities, and framing a problem worth solving.",
         },
         {
           title: "Programming fundamentals",
-          meta: "Session 3",
+          step: "Session 3 of 12",
           body: "First programs: instructions, sequences, variables and logic.",
         },
         {
           title: "Problem-solving and debugging",
-          meta: "Session 4",
+          step: "Session 4 of 12",
           body: "Reading errors, isolating causes and fixing code methodically.",
         },
         {
           title: "Electronics fundamentals",
-          meta: "Session 5",
+          step: "Session 5 of 12",
           body: "Circuits, components and safe prototyping practice.",
         },
         {
           title: "Arduino and coding",
-          meta: "Session 6",
+          step: "Session 6 of 12",
           body: "Bringing code and electronics together on a microcontroller.",
         },
         {
           title: "Sensors and actuators",
-          meta: "Session 7",
+          step: "Session 7 of 12",
           body: "Reading the world through sensors and responding through motors, lights and sound.",
         },
         {
           title: "3D design",
-          meta: "Session 8",
+          step: "Session 8 of 12",
           body: "Designing simple parts and enclosures in Tinkercad.",
         },
         {
           title: "Project development and presentation",
-          meta: "Session 9",
+          step: "Session 9 of 12",
           body: "Assembling the project and learning to explain the problem, process and result.",
         },
         {
           title: "Testing, feedback and improvement",
-          meta: "Session 10",
+          step: "Session 10 of 12",
           body: "Observing what happens, collecting feedback and identifying limitations.",
         },
         {
           title: "3D printing and fabrication",
-          meta: "Session 11",
+          step: "Session 11 of 12",
           body: "Printing designed parts and finishing the physical build.",
         },
         {
           title: "Final showcase",
-          meta: "Session 12",
-          body: "Presenting the developed project — problem, process and result — to an audience.",
+          step: "Session 12 of 12",
+          body: "Final project presentations to peers, instructors and guests, with live demonstration of prototypes, questions and constructive feedback from the audience, reflection, certificates and celebration.",
         },
       ],
     },
+    sections: [
+      {
+        heading: "Three core disciplines",
+        lead: "Not every student will master all three. But an intuitive grasp of all three, early, changes how they see everything around them.",
+        items: [
+          {
+            title: "Electronics",
+            body: "Introduced hands-on before any formal abstraction. The moment a student lights their first LED with a circuit they built themselves, something clicks. From there they grow into understanding how components behave and how microcontrollers think.",
+          },
+          {
+            title: "Coding",
+            body: "Taught as a thinking skill first and a technical skill second. C++ and Arduino are used deliberately: C++ builds strong computational thinking, while Arduino connects software directly to real-world hardware so students see their code act on the physical world.",
+          },
+          {
+            title: "3D design and printing",
+            body: "Using Tinkercad — intuitive, browser-based and beginner-friendly, yet capable of real printable designs. Students start with physical blocks and real-world analogies before moving to the screen, and learn to think for the printer: tolerances, overhangs and print orientation.",
+          },
+        ],
+      },
+      {
+        heading: "The Problem and Idea Booklet",
+        lead: "From the first day, every student receives a booklet with one instruction.",
+        body: [
+          "Write down every problem you notice, no matter how small, silly, unrelated or unsolvable it seems. A door that is hard to open. A bag strap that keeps slipping. Noise in a classroom. Nothing is too trivial.",
+          "The goal is creative confidence — the belief that I noticed something, and I can do something about it. Students are divided into teams of four in the first session, and the booklet feeds both the team project and the individual capstone throughout the workshop.",
+        ],
+      },
+      {
+        heading: "What a student gains",
+        items: [
+          { title: "Problem-finding and creative thinking skills" },
+          { title: "Confidence to act on ideas, however small" },
+          { title: "Intuitive understanding of electronics, coding and 3D design" },
+          { title: "English literacy through immersive material" },
+          { title: "Research, teamwork and presentation skills" },
+          { title: "A lasting habit of observation and curiosity" },
+        ],
+      },
+    ],
     finder: {
       categoryLabel: "STEAM, Coding & Making",
       ages: "Open to school students",
@@ -512,10 +713,11 @@ export const courses: Course[] = [
     kind: "category",
     title: "Entrepreneurship",
     shortTitle: "Entrepreneurship",
-    eyebrow: "Student Entrepreneurship Accelerator",
+    eyebrow: "Entrepreneurship Centre by nVentures",
     tagline: "Start with a problem worth understanding.",
     intro: [
-      "The proposed Student Entrepreneurship Accelerator is a year-long, project-based programme in which students investigate a real need, test their assumptions, build a useful first solution and present what they have learned. Progress is judged by evidence, honesty and improvement.",
+      "The Entrepreneurship Centre is designed to function as an incubator within the school, integrating STEAM skills with entrepreneurial thinking. It is sponsored and operated by nVentures, an early-stage venture capital fund licensed under the Monetary Authority of Singapore that invests across South and Southeast Asia.",
+      "The proposed Student Entrepreneurship Accelerator is a year-long, project-based programme in which students investigate a real need they have experienced themselves, test their assumptions, build a useful first solution and present what they have learned. Progress is judged by evidence, honesty and improvement.",
       "Entrepreneurship begins long before a pitch deck. It begins with the discipline to observe carefully, ask useful questions, recognise what is not yet known and revise an idea when evidence changes.",
     ],
     seoTitle: "Entrepreneurship for School Students | Ananda COE",
@@ -538,13 +740,13 @@ export const courses: Course[] = [
       },
       {
         label: "Cohort",
-        primary: "Proposed 20–30 students",
-        secondary: "Final grade range to be confirmed",
+        primary: "Proposed 20–30 students per cohort",
+        secondary: "Competitively selected on curiosity, honesty and commitment — not academic rank",
       },
       {
         label: "Approach",
-        primary: "Project-based accelerator",
-        secondary: "Progress judged by evidence, honesty and improvement",
+        primary: "Project-based accelerator with gate reviews",
+        secondary: "Students progress when they demonstrate the work, not when the calendar says so",
       },
       {
         label: "Final event",
@@ -570,27 +772,130 @@ export const courses: Course[] = [
       badges: ["One year", "Evidence over polish", "Demo Day finale"],
       items: [
         {
-          title: "Stage 1 — Discover",
-          meta: "Problem discovery",
-          body: "Students define an area of interest, speak with approved potential users and use tools such as the Five Whys to move from symptoms to underlying needs. They examine existing solutions before proposing another one. Stage evidence: at least six documented interviews and a clear problem statement.",
+          title: "Discover: find and validate a real problem",
+          step: "Stage 1 of 4",
+          meta: "Ends with a gate review",
+          topics: [
+            "User interviews",
+            "The Five Whys",
+            "Problem statements",
+            "Existing-solutions audit",
+            "Team formation",
+          ],
+          body: "Students define an area of interest, speak with approved potential users and use tools such as the Five Whys to move from symptoms to underlying needs. They examine existing solutions before proposing another one. Sessions run from a workshop on what makes a problem worth solving, through problem pitches and team formation, interview debriefs, a problem statement workshop and an existing-solutions audit, to a gate review.",
+          points: [
+            "Exit: a specific problem statement in the correct format.",
+            "Exit: evidence from at least six real user interviews.",
+            "Exit: one existing solution identified and its gap explained.",
+            "Exit: a credible answer to where technology fits.",
+            "Exit: full team alignment on the problem.",
+          ],
         },
         {
-          title: "Stage 2 — Define",
-          meta: "Assumptions & first prototype",
-          body: "Students generate possible responses, identify critical assumptions, create a low-fidelity prototype and gather structured feedback. Stage evidence: feedback from at least three approved users and a reasoned decision about what to change.",
+          title: "Define: design and test a solution",
+          step: "Stage 2 of 4",
+          meta: "Ends with a gate review",
+          topics: [
+            "How Might We",
+            "Assumption mapping",
+            "No-code tools",
+            "Low-fidelity mockups",
+            "Solution canvas",
+          ],
+          body: "Students generate possible responses through How Might We brainstorming, map their assumptions and design tests for them, debrief the results, learn what no-code tools can actually build, and gather feedback on a mockup before the gate review.",
+          points: [
+            "Exit: a specific solution concept with a named technology component.",
+            "Exit: at least three assumptions tested with real people, results documented.",
+            "Exit: a low-fidelity mockup showing the user flow.",
+            "Exit: feedback from at least three real potential users on the mockup.",
+            "Exit: a completed one-page solution canvas.",
+          ],
         },
         {
-          title: "Stage 3 — Build",
-          meta: "Minimum viable product",
-          body: "Students develop a minimum viable product, test it with a small approved user group and iterate. The aim is evidence that the team can turn learning into a more useful solution. Stage evidence: a working first version, feedback from five approved users and a concise explanation of the product and learning.",
+          title: "Build: ship a working MVP",
+          step: "Stage 3 of 4",
+          meta: "Ends with a gate review",
+          topics: [
+            "MVP scoping",
+            "Build sprints",
+            "User testing",
+            "Iteration",
+            "Product storytelling",
+          ],
+          body: "Students scope the build, run two build sprints with a real user test outside the lab in between, learn to explain their build to a stranger, and hold an internal demo day for peer review before the gate review. The goal is an MVP a stranger can use without help.",
+          points: [
+            "Exit: a functional MVP where a user can complete the core task unaided.",
+            "Exit: at least five real users have tested it, with feedback documented.",
+            "Exit: at least one full iteration cycle based on that feedback.",
+            "Exit: the team can explain the product clearly in under two minutes, plus a one-page product summary.",
+          ],
         },
         {
-          title: "Stage 4 — Launch",
-          meta: "Demo Day",
-          body: "Teams prepare a focused demonstration explaining the need, evidence, solution, limitations and next step. The proposed Demo Day format gives each team eight minutes to present and five minutes for questions — without rankings or prizes.",
+          title: "Launch: present publicly at Demo Day",
+          step: "Stage 4 of 4",
+          meta: "Public Demo Day",
+          topics: [
+            "Narrative craft",
+            "Presentation build",
+            "Dry runs",
+            "Live demo",
+            "Demo Day",
+          ],
+          body: "A narrative workshop, a presentation build and two dry runs lead into Demo Day itself: a full school event in the auditorium with students, parents, mentors and external guests in the audience. Each team gets eight minutes to present with a live demo, then five minutes of questions. Every team that reaches this stage receives a certificate — there are no rankings and no prizes, because the work is the achievement.",
         },
       ],
     },
+    sections: [
+      {
+        heading: "The Anandian Way of Innovation",
+        lead: "Every project is anchored in four pillars. Financial returns are a legitimate goal, but entrepreneurship must begin with the common good and the welfare of society at its core.",
+        numbered: true,
+        items: [
+          {
+            title: "කරුණා — Compassion and empathy",
+            body: "Innovation must start with empathy: solving a genuine problem for someone else.",
+          },
+          {
+            title: "ශීල — Ethics",
+            body: "Integrity in business, data privacy and fair trade.",
+          },
+          {
+            title: "දාන — Generosity",
+            body: "Entrepreneurship as service to society, not only profit.",
+          },
+          {
+            title: "උපේක්ඛා — Balance",
+            body: "Resilience in the face of failure, and humility in success.",
+          },
+        ],
+      },
+      {
+        heading: "Open to the whole school",
+        lead: "Alongside the selected cohort, the Centre is designed to serve every Ananda student — and, as a national model, students beyond it.",
+        items: [
+          {
+            title: "Open workshops",
+            body: "Open to all students and recorded to the learning management system.",
+          },
+          {
+            title: "Problem of the Quarter",
+            body: "A specific local social issue put to the whole school, with the best idea recognised.",
+          },
+          {
+            title: "Content library",
+            body: "All recordings, templates and the reading list, always accessible.",
+          },
+          {
+            title: "Startup internships",
+            body: "Tentative — subject to legal and administrative feasibility.",
+          },
+          {
+            title: "Inter-school challenge",
+            body: "From year two onwards, hosted by Ananda with other Colombo schools invited.",
+          },
+        ],
+      },
+    ],
     admission: {
       heading: "Selection",
       tabs: [
@@ -602,14 +907,26 @@ export const courses: Course[] = [
               body: "The draft programme prioritises curiosity, honesty and commitment rather than academic rank.",
             },
             {
+              title: "Grade range",
+              body: "The draft indicates a cohort drawn from Grades 6–13, with the programme mission written around Grades 8–13. The final range is being confirmed.",
+            },
+            {
               title: "Commitment",
               body: "Students should be able to attend one after-school session every two weeks across the full year, and to work with their team between sessions.",
+            },
+            {
+              title: "Teams",
+              body: "Teams can be formed after selection, so students do not need to arrive with a group or an idea.",
             },
           ],
         },
         {
           label: "How selection works",
           items: [
+            {
+              title: "Competitive selection",
+              body: "Cohorts of 20–30 students are selected competitively on curiosity, honesty and commitment.",
+            },
             {
               title: "Register interest",
               body: "Register for updates about the approved audience, selection process and first intake.",
@@ -622,9 +939,16 @@ export const courses: Course[] = [
         },
       ],
     },
+    policy: {
+      title: "Designed as a national model",
+      body: [
+        "While housed at Ananda, the Entrepreneurship Centre is intended to serve youth across Sri Lanka through open competitions and shared curricula, positioning the College as a benevolent leader in national education.",
+        "The vision is to inspire young Sri Lankans to become ethical innovators and compassionate entrepreneurs who build solutions that uplift communities — transforming students from test-takers into changemakers who use technology to solve real problems.",
+      ],
+    },
     finder: {
       categoryLabel: "Entrepreneurship",
-      ages: "Grade range to be confirmed",
+      ages: "Grades 6–13 (to be confirmed)",
       level: "Intermediate",
       duration: "One year",
       format: "After-school sessions",
@@ -644,393 +968,326 @@ export const courses: Course[] = [
     title: "Media and Communication",
     shortTitle: "Media & Communication",
     eyebrow: "Sumathi Convergence Media Centre",
-    tagline: "Learn to make media with technical skill and editorial care.",
+    tagline:
+      "One stackable pathway from a first podcast at twelve to a live convergence newsroom at eighteen — built towards a national vocational qualification.",
     intro: [
-      "The proposed media pathway introduces students to creating, refining and publishing responsible work across sound, video, live production and journalism. Five stackable short courses are designed for different age and grade groups, from a first podcast to a simulated newsroom.",
-      "Media literacy grows when students understand both how content is produced and why production choices matter. These programmes combine technical workflow, teamwork, storytelling, ethics, rights and audience awareness.",
+      "The Sumathi Convergence Media Centre (SCMC) teaches media as a single continuous pathway rather than a set of separate classes. Five stacked modules carry students from capturing one clean source of sound through field production, post-production, live multi-camera broadcasting and finally a working newsroom — 117 hours in all, mapped to clear age milestones.",
+      "Every module runs on two tracks at once: an academic path covering the theory beneath the craft — acoustic physics, optics, signal processing, media law — and a vocational path in the industry skills and software that employers actually use. The centre deliberately avoids expensive fixed television hardware in favour of a lean, software-defined studio sized for a 30-student footprint.",
+      "The framework harmonises the strategic project proposal by Prof. Dr. Rangamini Werawatta with the Advisory Board Electronics Media Curriculum (COE V3.1) and the hands-on STEAM Media operational track.",
     ],
     seoTitle: "Media Courses for Students in Sri Lanka | Ananda COE",
     metaDescription:
-      "Explore student courses in podcasting, mobile journalism, post-production, motion graphics, live broadcasting and news production.",
+      "A stackable 117-hour media pathway for ages 12-18 in podcasting, mobile journalism, post-production, AI workflows, live broadcasting and news production, leading towards NVQ Level 4.",
     keywords: [
       "media production courses for students Sri Lanka",
       "podcasting course Sri Lanka",
       "video production for students",
       "broadcasting course Colombo",
       "digital journalism course",
+      "NVQ media production Sri Lanka",
+      "mobile journalism course Sri Lanka",
     ],
     image: "/images/centre-media.jpg",
     imageAlt: "Broadcast camera in the Media Studio",
+    status: "Register your interest",
+    sidebar: [
+      {
+        label: "Target qualification",
+        primary: "National Certificate in Dual-Platform Media Production & AI Integration",
+        secondary: "NVQ Level 4 — planned, subject to TVEC accreditation",
+      },
+      {
+        label: "Structure",
+        primary: "Five stacked modules · 117 hours",
+        secondary: "Ages 12–18 · Grades 7–13 · three hours per week per module",
+      },
+      {
+        label: "Studio",
+        primary: "A 30-student software-defined studio",
+        secondary: "Agile and software-led rather than hardware-bound",
+      },
+      {
+        label: "Final assessment",
+        primary: "Portfolio capstone, not a written exam",
+        secondary: "Real production logs from signature school events, vetted by external TVEC auditors",
+      },
+    ],
+    objectives: {
+      heading: "What the pathway develops",
+      intro:
+        "Students progress through three cognitive tiers — Foundation Media Producer, Intermediate Media Producer and Advanced Media Producer — building technical capability alongside the editorial judgement that responsible media work requires.",
+      items: [
+        "Capture clean single sources: sound, image and field audio, understood from the physics upward.",
+        "Manipulate and finish raw material through editing, colour, audio mastering and motion design.",
+        "Use AI-assisted workflows deliberately — for noise repair, transcription, subtitling and packaging.",
+        "Operate multi-source live systems: switchers, signal routing, lighting grids and stream encoding.",
+        "Research, verify and write news for digital audiences, and present it on camera.",
+        "Work to professional crew roles, communicating clearly under real-time pressure.",
+        "Apply media law, copyright, aviation clearance and ethical judgement before publishing.",
+        "Build an assessable portfolio of real production work rather than classroom exercises.",
+      ],
+    },
+    outline: {
+      heading: "The five stacked modules",
+      badges: ["117 hours", "Ages 12–18", "Each module complete in itself"],
+      items: [
+        {
+          title: "Digital Podcasting, Audio Engineering and Acoustic Dynamics",
+          step: "Module 1 of 5",
+          meta: "Ages 12–14 · 15 hours",
+          topics: [
+            "Acoustics",
+            "Microphones",
+            "Studio recording",
+            "Audio editing",
+            "Mastering",
+            "Podcast publishing",
+          ],
+          body: "Five weeks, three hours a week. Foundation tier. Students learn how sound behaves and how it is captured, then script, record, master and publish an original multi-episode podcast pilot.",
+          points: [
+            "Sound engineering principles: characteristics of sound, wave parameters such as amplitude and velocity, audible frequency ranges, and electricity and analog signal blocks.",
+            "Transducer and capture mechanics: dynamic versus condenser microphone designs, directional polar patterns (cardioid, omnidirectional) and hardware cable tracking.",
+            "Studio operations and environment preparation: setting up recording spaces, sound-check protocols, audio balancing, gain-structure management and hardware safety.",
+            "Post-production and digital mastering: multi-track timeline mixing in Audacity and Pro Tools, noise-reduction filters, spectral audio repair and export matrices.",
+            "Project output and publishing pipelines: producing an original multi-episode podcast pilot and deploying RSS distribution feeds to Spotify, Apple Podcasts and YouTube.",
+          ],
+        },
+        {
+          title: "Mobile Journalism, Drone Operations and Field Production",
+          step: "Module 2 of 5",
+          meta: "Ages 12–15 · 18 hours",
+          topics: [
+            "Camera optics",
+            "Composition",
+            "Gimbal work",
+            "Field audio",
+            "Lighting",
+            "Drone basics",
+          ],
+          body: "Six weeks, three hours a week. Foundation to intermediate tier. Students take a story out of the classroom and into the field with a smartphone-first kit, finishing with a structured short feature.",
+          points: [
+            "Mobile camera system optics: video camera principles, hardware imaging sensors and lens functions including focus, electronic iris, shutter speed and variable ND filters.",
+            "Spatial composition and shot geometry: shot definitions (wide, medium, close-up), framing mechanics and rule-of-thirds geometry.",
+            "Stabilised motion engineering: setup and calibration of electronic three-axis smartphone gimbals, manual pan-tilt-zoom tracking and follow-mode tracking.",
+            "Field audio and illumination: rigging dual-channel wireless USB-C clip-on microphone arrays, monitoring signal, and indoor and outdoor single-camera lighting grids and reflectors.",
+            "Drone aviation and aerial data acquisition: aviation camera mechanics, remote telemetry operation, basic multi-axis flight paths, low-altitude tracking and landscape framing.",
+            "Field package assembly: deploying smartphone field kits on location to plan and break down scripts, log B-roll and produce a structured mobile journalism short feature.",
+          ],
+        },
+        {
+          title: "Post-Production, Motion Graphics and AI Prompt Engineering",
+          step: "Module 3 of 5",
+          meta: "Ages 15–16 · 24 hours",
+          topics: [
+            "DaVinci Resolve",
+            "Colour grading",
+            "Audio finishing",
+            "Motion graphics",
+            "AI workflows",
+          ],
+          body: "Eight weeks, three hours a week. Intermediate tier — the bridge of the pathway, where raw field material becomes finished work and AI enters the workflow as a tool under editorial control.",
+          points: [
+            "Digital video signal processing: analog-to-digital conversion, digital video formats, colour spaces, and luminance, chrominance, saturation and hue.",
+            "NLE timeline workflows and asset organisation: file system management, media asset workflows, ingest pipelines and offline/online editing models in DaVinci Resolve.",
+            "Colour grading dynamics: primary and secondary colour correction, balance adjustment, LUT processing and colour-scope analysis on calibrated monitors.",
+            "Audio optimisation inside the DAW: processing within non-linear timelines, sound-effect overlays, dialogue synchronisation, dynamic compression and mastering levels.",
+            "Motion design and 2D vector animation: vector layouts and motion paths in Blender, automated lower thirds, typography integration and subtitle rendering.",
+            "AI prompt engineering for audio: prompting models for background-noise extraction, dialogue repair, multi-track gain self-balancing and spectral repair automation.",
+            "AI prompt engineering for video packaging: speech-to-text transcription, localised multi-language subtitle generation and dynamic frame scaling.",
+            "Asset packaging and portfolio mastering: distribution formats, metadata optimisation, thumbnail design and cloud backup procedures.",
+          ],
+        },
+        {
+          title: "Live Multi-Camera Studio Broadcasting",
+          step: "Module 4 of 5",
+          meta: "Ages 16–18 · 30 hours",
+          topics: [
+            "Signal flow",
+            "Crew roles",
+            "Vision switching",
+            "Studio lighting",
+            "Live audio",
+            "Stream encoding",
+          ],
+          body: "Ten weeks, three hours a week. Advanced tier. A live broadcast only works when many people make clear decisions at the right moment; students rotate through every gallery crew position before the capstone.",
+          points: [
+            "Broadcast infrastructure and signal flows: multi-camera configuration, SDI and HDMI cable lines, signal conversion and Network Device Interface (NDI) routing.",
+            "Studio gallery crew architectures: the roles and command hierarchy of director, technical director, audio engineer, floor manager and camera operators.",
+            "Vision switcher surface controls: input configuration, scene management, cross-dissolves, downstream keyers and source routing in vMix or Blackmagic ATEM panels.",
+            "Studio light grid deployment: hanging and positioning overhead DMX-controlled LED softboxes on ceiling-anchored rails to keep the studio floor agile.",
+            "Live audio integration: routing multi-source studio microphones into the digital mixing console, monitoring feedback and balancing a live mix.",
+            "Multi-camera direction mechanics: live tracking, camera blocking, pacing, talkback communication and real-time switching.",
+            "Broadcast graphics and lower-thirds automation: live overlays, alpha-channel loops and dynamic scoreboard graphics in the stream.",
+            "Stream encoding and network engineering: RTMP and HLS parameters, bitrates, frame rates, bandwidth balancing and streaming to YouTube and Facebook Live.",
+            "Gallery troubleshooting protocols: real-time fault finding for bandwidth drops, signal failures, camera drops and audio feedback mid-stream.",
+            "Live capstone: students take gallery crew positions to broadcast a signature annual school event in full.",
+          ],
+        },
+        {
+          title: "Digital Journalism and News Production Technology",
+          step: "Module 5 of 5",
+          meta: "Ages 16–18 · 30 hours",
+          topics: [
+            "Media law & ethics",
+            "Verification",
+            "News writing",
+            "Anchoring",
+            "Teleprompter",
+            "Newsroom production",
+          ],
+          body: "Ten weeks, three hours a week. Advanced tier. Principles first — history, ethics and law — then the production practice of a working convergence newsroom.",
+          points: [
+            "Introduction to convergence journalism: the history of broadcasting, the evolution of digital newsrooms and multi-platform delivery.",
+            "Journalistic ethics and media law: media regulation, intellectual property, copyright protection, fair use and social media reporting responsibilities.",
+            "News research and investigative sourcing: verified data sourcing, background research, location surveys and legal clearances.",
+            "Text script writing and news formats: writing for the ear and the eye — news outlines, flash alerts, introductory hooks and short-form reporting copy.",
+            "Professional teleprompter and technical script formulation: building structured technical scripts and translating copy into scrolling teleprompter applications.",
+            "Vocal presentation and news anchoring: pronunciation, voice projection, breathing, presentation confidence and studio etiquette.",
+            "Investigative field newsgathering: deploying MoJo field kits to capture breaking visuals, track interviews and build stories under time constraints.",
+            "Drone regulatory compliance and spatial news: navigating Civil Aviation Authority of Sri Lanka (CAASL) parameters, Ministry of Defence clearances and aerial mapping for data stories.",
+            "Micro-content adaptation: converting a full news broadcast into text flashes, interactive threads and vertical micro-content.",
+            "Simulated newsroom launch: a live convergence newsroom simulation with students rotating across anchoring, prompters, gallery switching and real-time graphics.",
+          ],
+        },
+      ],
+    },
     sections: [
       {
-        heading: "A stackable pathway",
-        lead: "Each course is complete in itself — and each builds towards the next.",
+        heading: "Two tracks, one module",
+        lead: "Every module teaches the theory beneath the craft alongside the industry skill itself.",
+        items: [
+          {
+            title: "Module 1 — Podcasting and audio",
+            body: "Academic: acoustic physics, sound wave parameters, frequency spectrum subdivisions and transducer science. Vocational: multi-track microphone placement, voice tracking, digital mixing console gains and RSS podcast engine deployment.",
+          },
+          {
+            title: "Module 2 — Mobile journalism and field production",
+            body: "Academic: optics mechanics, camera sensor physics, focal lengths, lighting principles and the visible light colour spectrum. Vocational: agile smartphone filming, three-axis gimbal calibration, USB-C wireless microphone arrays and low-altitude drone telemetry.",
+          },
+          {
+            title: "Module 3 — Post-production and AI",
+            body: "Academic: analog-to-digital matrix mathematics, chroma and luma signal blocks, video formats and cloud AI architecture. Vocational: DaVinci Resolve non-linear editing, primary colour scopes, AI noise reduction, automated transcription and thumbnail asset design.",
+          },
+          {
+            title: "Module 4 — Live studio broadcasting",
+            body: "Academic: IP video data encapsulation, Network Device Interface signals, streaming network topologies and bitrates. Vocational: real-time vision switching, live scene mix effects, overhead DMX light rigging and RTMP/HLS live encoding.",
+          },
+          {
+            title: "Module 5 — Digital journalism and news production",
+            body: "Academic: media ethics, intellectual property and copyright guidelines, CAASL and Ministry of Defence aviation parameters, and script structural formats. Vocational: news anchoring, teleprompter operation, live bulletin mixing, investigative reporting and micro-content social packaging.",
+          },
+        ],
+      },
+      {
+        heading: "The course trail",
+        lead: "A continuous pipeline that captures interest at middle school and systematically upgrades technical capacity — a micro-credential model rather than compartmentalised classrooms.",
         numbered: true,
         items: [
           {
-            title: "Digital Podcasting, Audio Engineering and Acoustic Dynamics",
-            body: "Ages 12–14 · 15 hours — from basic audio principles to an original podcast pilot.",
+            title: "Ingress and single-source acquisition",
+            body: "Ages 12–15 · Grades 7–10. Fundamental capture mechanics. Students master individual sources through Module 1 — audio waves, acoustic properties and vocal microphone inputs — and Module 2 — camera field optics, three-axis stabilisation and remote micro-drone telemetry.",
           },
           {
-            title: "Mobile Journalism, Drone Operations and Field Production",
-            body: "Ages 12–15 · 18 hours — a supervised, mobile-first field story from planning to capture.",
+            title: "Mid-tier manipulation and AI synergy",
+            body: "Ages 15–16 · Grades 10–11. Post-production refinement. Module 3 is the critical bridge, where students manipulate, organise, colour grade and master raw field assets inside NLE timelines while using AI for background cleaning and automated transcript workflows.",
           },
           {
-            title: "Post-Production, Motion Graphics and AI Prompt Engineering",
-            body: "Ages 15–16 · 24 hours — editing, colour, audio finishing and motion graphics.",
+            title: "Advanced real-time studio convergence",
+            body: "Ages 16–18 · Grades 11–13. Multi-source systems engineering. Students operate complex network ecosystems in Module 4 — NDI routing, gallery control boards, switcher matrices and RTMP encoders — and Module 5 — newsroom anchoring, copyright architecture, aviation clearances and social adaptation.",
           },
           {
-            title: "Live Multi-Camera Studio Broadcasting",
-            body: "Ages 16–18 · 30 hours — a live broadcast made to work as one system.",
+            title: "The portfolio capstone and accreditation",
+            body: "Rather than a traditional written examination, the student's real-world media logs from managing signature annual events — Colours Night, Prize Giving, the Sports Meet — are vetted by external TVEC auditors towards the National Certificate in Dual-Platform Media Production & AI Integration at NVQ Level 4.",
+          },
+        ],
+      },
+      {
+        heading: "Where the pathway leads",
+        lead: "The stacked credentials map into three specialised industry streams, each with its own course trail and portfolio evidence.",
+        items: [
+          {
+            title: "Audio engineering and acoustic tracks",
+            body: "Trail: Module 1 → Module 3 → Module 4. Portfolio evidence: multi-track vocal mix files, corporate ad-read deliverables and a clean multi-episode podcast master. Placement options include digital podcast producer, studio sound engineer, audio mastering technician and acoustic media consultant.",
           },
           {
-            title: "Digital Journalism and News Production Technology",
-            body: "Ages 16–18 · 30 hours — ethics, verification and a simulated newsroom.",
+            title: "Digital field production and cinematography",
+            body: "Trail: Module 2 → Module 3 → Module 5. Portfolio evidence: run-and-gun field short documentaries, colour-graded commercial showreels and low-altitude drone aerial logs. Placement options include professional NLE video editor, commercial drone pilot, digital colorist and multimedia content creator.",
+          },
+          {
+            title: "Live broadcasting and newsroom technology",
+            body: "Trail: Module 3 → Module 4 → Module 5. Portfolio evidence: verified gallery crew technical logs covering vision switchers, DMX arrays and teleprompters during major school events. Placement options include live broadcast director, convergence news anchor, technical director and social media news strategist.",
           },
         ],
       },
     ],
-    cta: {
-      heading: "Five stackable courses. One pathway.",
-      body: "From a first podcast at twelve to a simulated newsroom at eighteen — each course builds on the last.",
-      label: "Register for course updates",
-    },
-    children: [
-      "digital-podcasting-audio-engineering",
-      "mobile-journalism-field-production",
-      "post-production-motion-graphics-ai",
-      "live-studio-broadcasting",
-      "digital-journalism-news-production",
-    ],
-  },
-  {
-    slug: "digital-podcasting-audio-engineering",
-    kind: "programme",
-    parent: "media-communication",
-    title: "Digital Podcasting, Audio Engineering and Acoustic Dynamics",
-    shortTitle: "Digital Podcasting & Audio Engineering",
-    eyebrow: "Media and communication",
-    tagline: "Turn an idea into a podcast people can hear clearly.",
-    intro: [
-      "This introductory course helps students understand how sound behaves, how microphones capture it and how careful recording and editing shape the listener's experience. Across five planned three-hour sessions, participants move from basic audio principles to an original podcast pilot.",
-    ],
-    seoTitle: "Podcasting and Audio Course for Students | Ananda COE",
-    metaDescription:
-      "A 15-hour course for ages 12-14 covering sound, microphones, studio practice, audio editing and an original podcast pilot.",
-    keywords: [
-      "podcasting course for students Sri Lanka",
-      "audio engineering for school students",
-      "podcast workshop Colombo",
-      "student podcast production",
-    ],
-    image: "/images/course-podcast.jpg",
-    imageAlt: "Studio microphone in soft light",
-    status: "Register your interest",
-    sidebar: [
-      {
-        label: "Audience",
-        primary: "Ages 12–14 · Grades 7–9",
-        secondary: "Introductory — no experience required",
-      },
-      {
-        label: "Duration",
-        primary: "15 hours across five sessions",
-        secondary: "Three hours per session",
-      },
-      {
-        label: "Final work",
-        primary: "Original podcast pilot",
-        secondary: "Recorded, edited and ready to share",
-      },
-    ],
-    objectives: {
-      heading: "What the course covers",
-      items: [
-        "How sound behaves — acoustics, rooms and the basics of hearing well.",
-        "How microphones capture sound, and which microphone suits which task.",
-        "Studio recording practice: levels, technique and working quietly as a team.",
-        "Audio editing: cutting, cleaning and shaping a listener's experience.",
-        "Planning, recording and finishing an original podcast pilot.",
-      ],
-    },
-    finder: {
-      categoryLabel: "Media & Communication",
-      ages: "Ages 12–14",
-      level: "Introductory",
-      duration: "15 hours",
-      format: "In person",
-      status: "Register interest",
-    },
-    cta: {
-      heading: "Find your voice on air.",
-      body: "Register to receive dates, studio details and enrolment information as they are confirmed.",
-      label: "Register interest",
-    },
-  },
-  {
-    slug: "mobile-journalism-field-production",
-    kind: "programme",
-    parent: "media-communication",
-    title: "Mobile Journalism, Drone Operations and Field Production",
-    shortTitle: "Mobile Journalism & Field Production",
-    eyebrow: "Media and communication",
-    tagline: "Report from the field with purpose, safety and control.",
-    intro: [
-      "This practical course introduces the planning and production skills behind a short mobile-first field story. Students learn optics and framing, stable camera movement, location sound, portable lighting and the preparation required before a crew begins recording.",
-    ],
-    seoTitle: "Mobile Journalism and Field Production for Students",
-    metaDescription:
-      "An 18-hour student course in mobile video, framing, stabilisation, field audio, lighting and responsible drone-production basics.",
-    keywords: [
-      "mobile journalism course Sri Lanka",
-      "field video production course",
-      "smartphone filmmaking students",
-      "drone media course Sri Lanka",
-    ],
-    image: "/images/course-mojo.jpg",
-    imageAlt: "Student filming with a stabilised smartphone rig",
-    status: "Register your interest",
-    sidebar: [
-      {
-        label: "Audience",
-        primary: "Ages 12–15 · Grades 7–10",
-        secondary: "Introductory — smartphone-first",
-      },
-      {
-        label: "Duration",
-        primary: "18 hours across six sessions",
-        secondary: "Classroom preparation plus supervised field work",
-      },
-      {
-        label: "Final work",
-        primary: "Supervised short field production",
-        secondary: "A complete mobile-first field story",
-      },
-    ],
-    objectives: {
-      heading: "What the course covers",
-      items: [
-        "Optics and framing — composing shots that tell the story.",
-        "Stable camera movement with handheld and gimbal technique.",
-        "Location sound: capturing clean audio outside the studio.",
-        "Portable lighting for real-world conditions.",
-        "Production planning — the preparation before a crew records.",
-        "Responsible drone basics: regulation, risk, permissions and supervised planning.",
+    admission: {
+      heading: "Entry, assessment and certification",
+      tabs: [
+        {
+          label: "Who it is for",
+          intro:
+            "Each module has its own age milestone, and students may enter the pathway at the point that matches their year group.",
+          items: [
+            {
+              title: "Ages 12–14 · Grades 7–9",
+              body: "Entry at Module 1. No prior experience is required — the pathway begins with how sound behaves and how to record it well.",
+            },
+            {
+              title: "Ages 12–15 · Grades 7–10",
+              body: "Module 2 runs alongside the foundation tier for students drawn to camera work and field reporting rather than the studio.",
+            },
+            {
+              title: "Ages 15–16 · Grades 10–11",
+              body: "Module 3 assumes basic capture skill and moves into editing, colour, audio finishing and AI-assisted workflows.",
+            },
+            {
+              title: "Ages 16–18 · Grades 11–13",
+              body: "Modules 4 and 5 are advanced, crew-based and newsroom-based. Students work to professional roles under live conditions.",
+            },
+          ],
+        },
+        {
+          label: "Assessment & certification",
+          items: [
+            {
+              title: "Portfolio over examination",
+              body: "Assessment is triggered by portfolio evidence — real production deliverables and verified crew logs — rather than a written paper.",
+            },
+            {
+              title: "External audit",
+              body: "Media logs from managing signature annual school events are vetted by external TVEC auditors.",
+            },
+            {
+              title: "Target qualification",
+              body: "The pathway is designed to unlock a National Certificate in Dual-Platform Media Production & AI Integration at NVQ Level 4. Accreditation is planned and subject to confirmation.",
+            },
+            {
+              title: "Cognitive tiers",
+              body: "Students progress from Level 1 Foundation Media Producer through Level 2 Intermediate Media Producer to Level 3 Advanced Media Producer.",
+            },
+          ],
+        },
       ],
     },
     policy: {
-      title: "Drone operations are supervised",
+      title: "Drone operations are regulated and supervised",
       body: [
-        "The drone component begins with regulation, risk, permissions and supervised production planning. Any flight activity depends on the required approvals and qualified supervision.",
+        "The drone components of Modules 2 and 5 begin with regulation, risk, permissions and supervised production planning. Students study Civil Aviation Authority of Sri Lanka (CAASL) parameters and Ministry of Defence clearance requirements as part of the curriculum.",
+        "Any flight activity depends on the required approvals and qualified supervision.",
       ],
     },
     finder: {
       categoryLabel: "Media & Communication",
-      ages: "Ages 12–15",
-      level: "Introductory",
-      duration: "18 hours",
+      ages: "Ages 12–18",
+      level: "All levels",
+      duration: "117 hours across five modules",
       format: "In person",
       status: "Register interest",
     },
     cta: {
-      heading: "Tell stories from the field.",
-      body: "Register to receive confirmed dates, equipment details and enrolment information.",
-      label: "Register for updates",
-    },
-  },
-  {
-    slug: "post-production-motion-graphics-ai",
-    kind: "programme",
-    parent: "media-communication",
-    title: "Post-Production, Motion Graphics and AI Prompt Engineering",
-    shortTitle: "Post-Production & Motion Graphics",
-    eyebrow: "Media and communication",
-    tagline: "Shape raw material into a coherent story.",
-    intro: [
-      "Post-production is where technical accuracy and creative judgement meet. This eight-session course introduces students to video signals and media organisation before moving through editing, colour, audio finishing, motion graphics and selected AI-assisted workflows.",
-    ],
-    seoTitle: "Video Editing, Motion Graphics and AI Course for Students",
-    metaDescription:
-      "A 24-hour course for ages 15-16 in editing, colour, audio, motion graphics and responsible AI-assisted production.",
-    keywords: [
-      "video editing course for students Sri Lanka",
-      "motion graphics course Colombo",
-      "DaVinci Resolve course students",
-      "AI media course Sri Lanka",
-    ],
-    image: "/images/course-postprod.jpg",
-    imageAlt: "Colour-grading suite with editing controls",
-    status: "Register your interest",
-    sidebar: [
-      {
-        label: "Audience",
-        primary: "Ages 15–16 · Grades 10–11",
-        secondary: "Intermediate — builds on basic camera skills",
-      },
-      {
-        label: "Duration",
-        primary: "24 hours across eight sessions",
-        secondary: "Suite-based practical work",
-      },
-      {
-        label: "Final work",
-        primary: "A small post-production portfolio",
-        secondary: "Edited, graded and finished pieces",
-      },
-    ],
-    objectives: {
-      heading: "What the course covers",
-      items: [
-        "Video signals and media organisation — the technical foundation of every edit.",
-        "Editing: structure, rhythm and storytelling decisions.",
-        "Colour: correction and grading for mood and consistency.",
-        "Audio finishing: dialogue, music and mix.",
-        "Motion graphics: titles and animated elements.",
-        "Selected AI-assisted workflows — used deliberately and responsibly.",
-      ],
-    },
-    finder: {
-      categoryLabel: "Media & Communication",
-      ages: "Ages 15–16",
-      level: "Intermediate",
-      duration: "24 hours",
-      format: "In person",
-      status: "Register interest",
-    },
-    cta: {
-      heading: "Master the edit.",
-      body: "Register to receive course dates, software details and enrolment information as they are confirmed.",
-      label: "Register interest",
-    },
-  },
-  {
-    slug: "live-studio-broadcasting",
-    kind: "programme",
-    parent: "media-communication",
-    title: "Live Multi-Camera Studio Broadcasting",
-    shortTitle: "Live Studio Broadcasting",
-    eyebrow: "Media and communication",
-    tagline: "Learn what it takes to make live production work as one system.",
-    intro: [
-      "A live broadcast depends on many people making clear decisions at the right moment. Across ten planned sessions, students explore studio signal flow, crew roles, camera and switcher operation, lighting, live sound, directing, graphics, streaming and fault-finding.",
-    ],
-    seoTitle: "Live Studio Broadcasting Course for School Students",
-    metaDescription:
-      "A 30-hour course for ages 16-18 covering signal flow, production roles, switching, lighting, live audio, directing and streaming.",
-    keywords: [
-      "broadcasting course for students Sri Lanka",
-      "live studio production course",
-      "multi-camera course Colombo",
-      "television production for students",
-    ],
-    image: "/images/course-broadcast.jpg",
-    imageAlt: "Broadcast control room in low light",
-    status: "Register your interest",
-    sidebar: [
-      {
-        label: "Audience",
-        primary: "Ages 16–18 · Grades 11–13",
-        secondary: "Advanced — crew-based studio work",
-      },
-      {
-        label: "Duration",
-        primary: "30 hours across ten sessions",
-        secondary: "Every student rotates through the crew roles",
-      },
-      {
-        label: "Final work",
-        primary: "Supervised multi-camera capstone event",
-        secondary: "Broadcast live as one crew",
-      },
-    ],
-    objectives: {
-      heading: "What the course covers",
-      items: [
-        "Studio signal flow — how every source reaches the programme output.",
-        "Crew roles and communication: who decides what, and when.",
-        "Camera and switcher operation under live conditions.",
-        "Lighting and live sound for the studio floor.",
-        "Directing, graphics and streaming.",
-        "Fault-finding — keeping the broadcast alive when something breaks.",
-      ],
-    },
-    finder: {
-      categoryLabel: "Media & Communication",
-      ages: "Ages 16–18",
-      level: "Advanced",
-      duration: "30 hours",
-      format: "In person",
-      status: "Register interest",
-    },
-    cta: {
-      heading: "Take the director's chair.",
-      body: "Register to receive studio dates, crew-role details and enrolment information.",
-      label: "Register interest",
-    },
-  },
-  {
-    slug: "digital-journalism-news-production",
-    kind: "programme",
-    parent: "media-communication",
-    title: "Digital Journalism and News Production Technology",
-    shortTitle: "Digital Journalism & News Production",
-    eyebrow: "Media and communication",
-    tagline: "Ask better questions. Verify before you publish.",
-    intro: [
-      "This ten-session course introduces the principles and production practices behind trustworthy digital journalism. Students examine journalism history, ethics and relevant law before practising research, verification, news writing, teleprompter presentation, field gathering and short-form production.",
-    ],
-    seoTitle: "Digital Journalism Course for School Students in Sri Lanka",
-    metaDescription:
-      "A 30-hour course for ages 16-18 in journalism ethics, research, news writing, presentation and newsroom production.",
-    keywords: [
-      "digital journalism course Sri Lanka",
-      "journalism course for school students",
-      "news production course Colombo",
-      "student newsroom programme",
-    ],
-    image: "/images/course-journalism.jpg",
-    imageAlt: "Student presenting at a news desk",
-    status: "Register your interest",
-    sidebar: [
-      {
-        label: "Audience",
-        primary: "Ages 16–18 · Grades 11–13",
-        secondary: "Advanced — newsroom-style teamwork",
-      },
-      {
-        label: "Duration",
-        primary: "30 hours across ten sessions",
-        secondary: "Principles first, then production practice",
-      },
-      {
-        label: "Final work",
-        primary: "A simulated newsroom production",
-        secondary: "Researched, verified, written and presented",
-      },
-    ],
-    objectives: {
-      heading: "What the course covers",
-      items: [
-        "Journalism history, ethics and relevant law — before anything is published.",
-        "Research and verification: checking before claiming.",
-        "News writing for digital audiences.",
-        "Teleprompter presentation and on-camera delivery.",
-        "Field gathering and short-form production.",
-        "Working as a newsroom: editorial decisions under deadline.",
-      ],
-    },
-    finder: {
-      categoryLabel: "Media & Communication",
-      ages: "Ages 16–18",
-      level: "Advanced",
-      duration: "30 hours",
-      format: "In person",
-      status: "Register interest",
-    },
-    cta: {
-      heading: "Report what matters.",
-      body: "Register to receive confirmed dates, newsroom details and enrolment information.",
-      label: "Register for updates",
+      heading: "Five modules. One pathway. One qualification.",
+      body: "Register to receive confirmed dates, studio details, module entry points and enrolment information as they are approved.",
+      label: "Register for course updates",
     },
   },
 
@@ -1041,9 +1298,10 @@ export const courses: Course[] = [
     title: "Fine and Digital Arts",
     shortTitle: "Fine & Digital Arts",
     eyebrow: "Fine and Digital Arts Programme",
-    tagline: "Develop a visual language across physical and digital media.",
+    tagline: "Create. Innovate. Inspire. Your canvas, your code, your future.",
     intro: [
       "The proposed Fine Arts and Digital Arts Programme combines observation and studio practice with contemporary tools for illustration, animation, 3D design, photography, video and user experience. Students progress through age-appropriate levels while building a body of original work.",
+      "The aim is to develop artistic proficiency across traditional and digital media, foster visual literacy and aesthetic judgement, and prepare students for higher education and careers in the creative industries — while building confidence in both artistic voice and technical mastery.",
     ],
     seoTitle: "Fine Art and Digital Art Courses for Students | Ananda COE",
     metaDescription:
@@ -1074,10 +1332,141 @@ export const courses: Course[] = [
         primary: "Portfolio-centred",
         secondary: "Practical work, theory, process, participation and a final capstone",
       },
+      {
+        label: "Weekly commitment",
+        primary: "6–9 hours of taught time",
+        secondary:
+          "2–3 hours of theory plus 4–6 hours of supervised studio work, with 3–5 hours of independent practice expected",
+      },
     ],
+    outline: {
+      heading: "Three levels",
+      badges: ["Age-appropriate progression", "A growing body of original work"],
+      items: [
+        {
+          title: "Observation, materials and visual storytelling",
+          step: "Level 1 of 3 — Foundation",
+          meta: "Grades 6–8",
+          topics: [
+            "Drawing & self-portraits",
+            "Colour theory",
+            "Clay & sculpture",
+            "Comics",
+            "Photography",
+            "Digital illustration",
+            "Calligraphy",
+          ],
+          body: "Students build confidence in observation, materials, colour and visual storytelling through self-portraits, nature sketchbooks, digital doodles, comics, clay work, photography, collaborative murals, paper structures and calligraphy.",
+        },
+        {
+          title: "Technique, identity and animation",
+          step: "Level 2 of 3 — Intermediate",
+          meta: "Grades 9–10",
+          topics: [
+            "Portraiture",
+            "Mixed media",
+            "Brand identity",
+            "Stop-motion",
+            "Printmaking",
+            "3D modelling",
+            "UI/UX design",
+          ],
+          body: "Students deepen technical control through portraiture, mixed media, brand identity, stop-motion, outdoor drawing, printmaking, 3D characters, user-interface design and work responding to a social idea.",
+        },
+        {
+          title: "Portfolio, exhibition and AI-assisted practice",
+          step: "Level 3 of 3 — Advanced",
+          meta: "Post-O/L and A/L",
+          topics: [
+            "Senior portfolio",
+            "Exhibition curation",
+            "Motion graphics & VFX",
+            "3D environments",
+            "Installation",
+            "AI-assisted creation",
+          ],
+          body: "Students develop a coherent portfolio and undertake more independent work in exhibition curation, motion and visual effects, installation, photography, 3D environments and integrated creative campaigns. Several advanced projects introduce AI tools deliberately — for texture generation, motion prediction, post-processing and ideation — with emphasis on human-AI collaboration and the ethics of image manipulation.",
+        },
+      ],
+    },
+    admission: {
+      heading: "Assessment, certification and progression",
+      tabs: [
+        {
+          label: "How work is assessed",
+          intro:
+            "Assessment is continuous, formative and portfolio-based, reflecting the developmental nature of artistic skill-building.",
+          items: [
+            {
+              title: "Practical assessments — 60%",
+              body: "Evaluation of completed artworks on technical skill, creativity and concept.",
+            },
+            {
+              title: "Portfolio reviews — 20%",
+              body: "Quarterly assessment of work progression and artistic development.",
+            },
+            {
+              title: "Theory assessments — 10%",
+              body: "Quizzes and written assignments on art history, criticism and theory.",
+            },
+            {
+              title: "Process documentation — 5%",
+              body: "Sketchbooks, research journals and project planning materials.",
+            },
+            {
+              title: "Capstone projects — 5%",
+              body: "Major final works demonstrating mastery and a personal artistic voice, alongside contribution to school exhibitions and public showcases.",
+            },
+          ],
+        },
+        {
+          label: "Certification",
+          items: [
+            {
+              title: "Module and level certificates",
+              body: "Issued on completion of each specialised area, and for the Foundation, Intermediate and Advanced levels.",
+            },
+            {
+              title: "Digital badges",
+              body: "Awarded for specific skill achievements, such as digital illustration or portrait drawing.",
+            },
+            {
+              title: "Final programme certificate",
+              body: "Recognising comprehensive completion, together with professionally photographed portfolio documentation.",
+            },
+            {
+              title: "Recognition and alignment",
+              body: "Certificates are intended to align with national vocational qualifications frameworks where applicable, and to be recognised for higher education applications.",
+            },
+          ],
+        },
+        {
+          label: "Where it leads",
+          items: [
+            {
+              title: "Internships",
+              body: "Opportunities with design firms, advertising agencies, animation studios and art galleries.",
+            },
+            {
+              title: "Career counselling",
+              body: "Pathways into fine arts, graphic design, animation, game design, architecture, art education and creative entrepreneurship.",
+            },
+            {
+              title: "Professional practice",
+              body: "Workshops covering portfolio preparation, freelancing, branding and networking.",
+            },
+            {
+              title: "Industry mentorship",
+              body: "A mentorship programme connecting students with working artists and designers.",
+            },
+          ],
+        },
+      ],
+    },
     sections: [
       {
         heading: "Three streams",
+        lead: "Students may specialise in either stream, or pursue an integrated pathway combining both.",
         items: [
           {
             title: "Fine Arts stream",
@@ -1093,28 +1482,37 @@ export const courses: Course[] = [
           },
         ],
       },
+      {
+        heading: "How the centre runs",
+        lead: "A blended approach combining instructor-led studio sessions with self-paced modules and independent practice.",
+        items: [
+          {
+            title: "Practical training",
+            body: "Studio work in well-equipped fine arts studios with proper lighting and materials, digital labs with industry-standard hardware and software, outdoor sketching and plein air painting, darkroom facilities for traditional photography, and exhibition space for student showcases.",
+          },
+          {
+            title: "Theoretical sessions",
+            body: "Classroom instruction in art history, theory and critique, supported by online lectures, video tutorials and virtual gallery tours.",
+          },
+          {
+            title: "Learning methodology",
+            body: "Every module carries clear learning outcomes and skill benchmarks, guided demonstrations, peer critique, individual mentoring and both formative and summative assessment.",
+          },
+          {
+            title: "Enrichment",
+            body: "Guest lectures from professional artists, designers and curators; masterclasses with visiting artists; gallery and museum visits; artist-in-residence programmes; and participation in art fairs and creative festivals.",
+          },
+          {
+            title: "Community engagement",
+            body: "Public art projects, workshops for feeder schools, partnerships with local galleries and cultural organisations, and social responsibility projects using art for community development.",
+          },
+          {
+            title: "Sustainability and ethics",
+            body: "Education in sustainable art practice and eco-friendly materials, ethical use of digital resources, copyright awareness, and cultural sensitivity in representation.",
+          },
+        ],
+      },
     ],
-    outline: {
-      heading: "Three levels",
-      badges: ["Age-appropriate progression", "A growing body of original work"],
-      items: [
-        {
-          title: "Foundation",
-          meta: "Grades 6–8",
-          body: "Students build confidence in observation, materials, colour and visual storytelling through self-portraits, nature sketchbooks, digital doodles, comics, clay work, photography, collaborative murals, paper structures and calligraphy.",
-        },
-        {
-          title: "Intermediate",
-          meta: "Grades 9–10",
-          body: "Students deepen technical control through portraiture, mixed media, brand identity, stop-motion, outdoor drawing, printmaking, 3D characters, user-interface design and work responding to a social idea.",
-        },
-        {
-          title: "Advanced",
-          meta: "Post-O/L and A/L",
-          body: "Students develop a coherent portfolio and undertake more independent work in exhibition curation, motion and visual effects, installation, photography, 3D environments and integrated creative campaigns.",
-        },
-      ],
-    },
     finder: {
       categoryLabel: "Fine & Digital Arts",
       ages: "Grades 6 to A/L",
@@ -1191,22 +1589,52 @@ export const courses: Course[] = [
       items: [
         {
           title: "The introductory lecture",
+          step: "Part 1 of 4",
           meta: "Where English comes from",
+          topics: [
+            "History of English",
+            "Zeylanicisms",
+            "Elocution",
+            "Diphthongs",
+            "Vocabulary",
+          ],
           body: "The historical formation of Old, Middle and Modern English and its place beside Sinhala in the Indo-European family of languages; Zeylanicisms and common errors in Sri Lankan English; speech and elocution; words mispronounced because certain letters are absent from the Sinhala alphabet; diphthong sounds; the island's fondly collected malapropisms; and the value of reading and a rich vocabulary.",
         },
         {
           title: "Conversation and confidence",
+          step: "Part 2 of 4",
           meta: "Speak first",
+          topics: [
+            "Dialogue reading",
+            "Speaking practice",
+            "Idiom",
+            "Grammar in context",
+          ],
           body: "Reading books rich in dialogue — colloquial and refined — and conversing with fluent speakers builds self-confidence and natural skill. Grammar rules are taught when necessary rather than as a separate hurdle.",
         },
         {
           title: "Language and literature",
+          step: "Part 3 of 4",
           meta: "The formal syllabus",
+          topics: [
+            "Formal syllabus",
+            "Films & CDs",
+            "Self-study",
+            "Examinations",
+          ],
           body: "A syllabus for English language and literature prepared by the instructors and qualified individuals in due course, based on standard methods — supported by films, CDs and literature for self-study, with instructors always available to guide, and material covering examinations and practice tests.",
         },
         {
           title: "Personality and public communication",
+          step: "Part 4 of 4",
           meta: "Beyond the classroom",
+          topics: [
+            "Current affairs",
+            "Debate & moot",
+            "Interviews",
+            "Public speaking",
+            "Compèring",
+          ],
           body: "The Lab integrates personality development with communication: discussing current social and legal issues, training in analysis, brainstorming and defending or refuting positions — with live debates and moot events. The scholar leaves able to face interviews, speak publicly with proper diction and act as compère or master of ceremonies at any gathering.",
         },
       ],
@@ -1236,6 +1664,7 @@ export const courses: Course[] = [
     tagline: "Study living systems by asking, testing and applying.",
     intro: [
       "The Science Centre is being designed to connect curriculum knowledge with investigation, design and public purpose. Proposed pathways bring biology, health, agriculture, food systems and environmental responsibility into practical projects that show how evidence informs decisions.",
+      "The proposed curriculum integrates biological science with STEAM to build ethics, empathy and social entrepreneurship from Year 6 onwards, framing every project as a solution for an actual person rather than an exercise. Empathy is treated as the first step of the design process, not an afterthought.",
     ],
     seoTitle: "Science and Sustainability for Students | Ananda COE",
     metaDescription:
@@ -1250,6 +1679,49 @@ export const courses: Course[] = [
     image: "/images/centre-science.jpg",
     imageAlt: "Microscope work in the Centre for Science",
     status: "In development",
+    sections: [
+      {
+        heading: "How science is taught here",
+        lead: "Four approaches run through every proposed pathway.",
+        items: [
+          {
+            title: "Problem-based learning",
+            body: "Students tackle real issues such as ocean acidification or oil spill clean-up, integrating chemistry, biology and ethics rather than treating them separately.",
+          },
+          {
+            title: "Inquiry-based learning",
+            body: "Open-ended exploration that rewards curiosity and critical thinking over recall.",
+          },
+          {
+            title: "Design thinking",
+            body: "The engineering design cycle applied to biological problems, beginning with empathy mapping — what a person affected by the problem says, thinks, does and feels.",
+          },
+          {
+            title: "Real-world application",
+            body: "Connecting classroom concepts to sports medicine, zoology, agriculture and public health, with community interviews so students hear directly from those affected.",
+          },
+        ],
+      },
+      {
+        heading: "Three strands",
+        lead: "The proposed curriculum spirals across three strands from junior concepts through to professional integrity.",
+        numbered: true,
+        items: [
+          {
+            title: "Ethical perspectives",
+            body: "From early ethical argumentation and civic commitment through to navigating the implications of globalisation and large-scale social policy.",
+          },
+          {
+            title: "Social innovation",
+            body: "Hands-on project work focused on creating socially oriented ventures that address community health and environmental issues.",
+          },
+          {
+            title: "Community development",
+            body: "Investing in human capital through education and capacity building, understanding how health and education spending drives long-term community outcomes.",
+          },
+        ],
+      },
+    ],
     cta: {
       heading: "Follow programme development.",
       body: "Register to hear as the science pathways move from proposal to intake.",
@@ -1297,24 +1769,73 @@ export const courses: Course[] = [
       badges: ["Foundations → specialisation", "Projects with public purpose"],
       items: [
         {
-          title: "Beginnings",
-          meta: "Foundations",
-          body: "Classification, cells and human body systems — learning to observe closely and record honestly.",
+          title: "Foundations of life and systems",
+          step: "Stage 1 of 3",
+          meta: "Year 6",
+          topics: [
+            "Classification",
+            "Cells",
+            "Body systems",
+            "Bio-ethics",
+            "Community Health Map",
+          ],
+          body: "Classification of organisms, cell structures and how physical conditions affect survival, alongside human biology through the circulatory and respiratory systems. Students learn to observe closely and record honestly.",
+          points: [
+            "Empathy through interaction: role-play to understand diverse perspectives and active listening that respects dissenting views.",
+            "Bio-ethics and citizenship: an introduction to ethical argumentation, viewing biology through the lens of social transformation.",
+            "Foundational entrepreneurship: how simple business models and innovation can address local poverty or health.",
+            "Project — The Community Health Map: students identify a local health issue such as nutrition and use art to visualise its impact across different groups.",
+          ],
         },
         {
-          title: "Progression",
-          meta: "Investigation",
-          body: "Microbiology, genetics, ecosystems and biomimicry — investigation across living systems.",
+          title: "Middle school exploration",
+          step: "Stage 2 of 3",
+          meta: "Years 7–9",
+          topics: [
+            "Microbiology",
+            "Genetics",
+            "Ecosystems",
+            "Biomimicry",
+            "Bio-Start-Up Lab",
+          ],
+          body: "Microbiology, genetics, ecosystems and biomimicry — the design approach that emulates nature's tested patterns and strategies to solve human problems, drawing on billions of years of biological research.",
+          points: [
+            "Transdisciplinary biology: integrating technology and engineering to solve environmental and biological challenges such as clean water access.",
+            "Social value creation: problem-based learning that bridges the knowing-doing gap by researching and pitching a social enterprise.",
+            "Human capital basics: how investment in health and education acts as a long-term economic driver for communities.",
+            "Project — The Bio-Start-Up Lab: teams design a project plan addressing a community waste issue using biological principles such as composting.",
+          ],
         },
         {
-          title: "Later stages",
-          meta: "Specialisation",
-          body: "3D anatomy, molecular biology, biotechnology, sustainability and biomedical communication.",
+          title: "Advanced specialisation",
+          step: "Stage 3 of 3",
+          meta: "Years 10–13",
+          topics: [
+            "3D anatomy",
+            "Molecular biology",
+            "Biotechnology",
+            "Sustainability",
+            "Bio-entrepreneurship",
+          ],
+          body: "Human anatomy in 3D digital visualisation, molecular biology and the molecular pathways of disease, biotechnology, environmental sustainability, and communicating biomedical science so complex concepts become accessible.",
+          points: [
+            "Human resource development in STEM: how it acts as a mechanism for poverty alleviation and community modernisation.",
+            "Demography and economics: the interplay between human capital, urbanisation and investment in sustainable growth.",
+            "Bio-entrepreneurship: identifying revenue streams, market feasibility for life science products, and financial management.",
+            "Professional ethics: mastering the three Cs — curiosity, creativity and competence.",
+            "Project — The Community Investment Pitch: propose a social enterprise employing local talent to produce affordable health products, calculating both financial feasibility and social return.",
+          ],
         },
         {
-          title: "Projects",
-          meta: "Public purpose",
-          body: "A community health map, a supervised bio-enterprise concept, or a public explanation of a biological issue — scientific evidence applied where it matters.",
+          title: "STEAM integration",
+          meta: "Across all years",
+          topics: [
+            "3D printing",
+            "Smart greenhouses",
+            "Sensors & data",
+            "Group roles",
+          ],
+          body: "Biology is deliberately connected to the other disciplines: 3D printing used to create bionic prosthetics and anatomical models; smart greenhouses built with sensors to track data, then supported by digital or physical campaigns for sustainable farming. Structured group work uses rotating roles — leader, builder, recorder, sharer — so every student practises each.",
         },
       ],
     },
@@ -1371,16 +1892,61 @@ export const courses: Course[] = [
       intro:
         "Investigations are chosen to show how evidence informs everyday decisions about food and farming.",
       items: [
-        "Smart irrigation — sensing and responding to what plants actually need.",
-        "Yeast — the living chemistry behind everyday food.",
-        "Solar cooking — energy, design and practical preparation.",
-        "Hydroponics — growing without soil.",
-        "Food labels — reading, questioning and verifying claims.",
-        "Preservation — keeping food safe and useful for longer.",
-        "Sustainable meal design — nutrition, cost and footprint together.",
-        "A farm-to-table enterprise plan — from evidence to a responsible proposal.",
+        "Smart irrigation — designing a drip system that delivers precise water amounts to crops.",
+        "Yeast — finding optimal fermentation rates by experimenting with sugar and temperature.",
+        "Solar cooking — building a functional solar oven and studying heat conduction and renewable energy.",
+        "Hydroponics — growing without soil in a nutrient-rich water system.",
+        "Food labels — reading, questioning and verifying claims, and seeing how processing affects nutritional value.",
+        "Cereal magnetism — using magnets to extract and visualise the iron added to fortified breakfast cereals.",
+        "Preservation — comparing dehydration, pickling and fermentation for shelf life, taste and texture.",
+        "Molecular gastronomy — spherification and the reaction between sodium alginate and calcium.",
+        "Sustainable meal design — transforming high-fat, high-salt recipes into nutrient-dense alternatives.",
+        "A farm-to-table enterprise plan — brand, packaging and marketing strategy for a sustainable food product.",
       ],
     },
+    sections: [
+      {
+        heading: "Five core strands",
+        lead: "A field-to-fork learning pathway running from Grade 6 through to A/L.",
+        numbered: true,
+        items: [
+          {
+            title: "Agriculture and production",
+            body: "Plant life cycles, soil health and nutrient needs, and irrigation models — progressing to precision agriculture with sensors and drones, sustainable industrial farming, and climate change impact.",
+          },
+          {
+            title: "Nutrition and wellness",
+            body: "The major nutrient groups, reading food labels and adolescent caloric needs — progressing to macronutrients and micronutrients, dietary requirements across the life cycle, and the link between food and disease prevention.",
+          },
+          {
+            title: "Food science and chemistry",
+            body: "Physical versus chemical changes in cooking and preservation — progressing to molecular gastronomy, fermentation chemistry and the role of microbiology in food safety.",
+          },
+          {
+            title: "Food processing and technology",
+            body: "Drying, canning and freezing to prevent spoilage — progressing to industrial production methods, food safety and hygiene, labelling and sustainable packaging.",
+          },
+          {
+            title: "Culinary arts",
+            body: "Kitchen safety, precise measurement and basic methods such as stewing and baking, integrating mathematical concepts of measurement and portioning.",
+          },
+        ],
+      },
+      {
+        heading: "Engineering and policy",
+        lead: "For older students, the pathway moves towards design and the decisions that shape food systems.",
+        items: [
+          {
+            title: "Engineering",
+            body: "Designing hydrogels for water retention, or automated harvesting robots.",
+          },
+          {
+            title: "Policy and ethics",
+            body: "Food insecurity, global population challenges, and the influence of marketing on diet.",
+          },
+        ],
+      },
+    ],
     finder: {
       categoryLabel: "Science & Sustainability",
       ages: "Staged by grade level",
@@ -1420,6 +1986,26 @@ export const courses: Course[] = [
     image: "/images/centre-math.jpg",
     imageAlt: "Geometric models in the Mathematics Centre",
     status: "Learning spaces in development",
+    sections: [
+      {
+        heading: "Culture before contests",
+        lead: "The spirit of the laboratory matters more than its equipment.",
+        items: [
+          { title: "Persistence and curiosity are valued over speed." },
+          { title: "Creative approaches are rewarded, not only correct answers." },
+          { title: "A Problem of the Month is displayed alongside student solutions." },
+          { title: "Art and mathematics meet — designing with symmetry, exploring fractals." },
+          {
+            title: "Teachers are trained in Olympiad-style pedagogy",
+            body: "Following Pólya's problem-solving principles: understand, plan, solve, reflect.",
+          },
+          {
+            title: "Research projects bridge Olympiad thinking with STEAM exploration",
+            body: "Investigating patterns in Pascal's triangle using code, exploring minimal surfaces, studying prime distributions, and designing fractals to explore recursive relations.",
+          },
+        ],
+      },
+    ],
     sidebar: [
       {
         label: "Two laboratories",
@@ -1439,12 +2025,45 @@ export const courses: Course[] = [
         {
           title: "Hands-on Mathematics Laboratory",
           meta: "Enrichment and modelling",
+          topics: [
+            "Manipulatives",
+            "GeoGebra & Desmos",
+            "Coding patterns",
+            "3D printing",
+            "Modelling",
+          ],
           body: "Physical manipulatives, visualisation, art and design, experiment kits, technology, coding and robotics — supporting classroom concepts, mathematical modelling and collaborative investigations across grade levels.",
+          points: [
+            "Geometry and measurement: geoboards, 2D and 3D shape models, isometric drawing kits, mirrors for symmetry, tangrams and pattern blocks, angle finders and clinometers.",
+            "Algebra and arithmetic: algebra tiles for visualising equations and polynomials, number lines, fraction kits, base-ten blocks, Cuisenaire rods and the abacus.",
+            "Technology: GeoGebra, Desmos and PhET simulations; Scratch and Python for coding mathematical patterns; spreadsheets; graphing tools; Arduino and micro:bit kits; and a 3D printer for solids, fractals and tessellations.",
+            "Art and design integration: origami, string art boards, mosaic and tessellation tiles, and Tinkercad for 3D modelling.",
+            "Experimentation: balance scales, measuring cylinders, probability spinners and dice, pendulums and stopwatches, and construction sets for geometric and algebraic reasoning.",
+            "Example activities: tessellation murals, drawing geometric figures in code, paper bridges tested for load, sensor data collection for statistics, and folding polyhedra to study surface area and volume.",
+          ],
         },
         {
           title: "Olympiad Mathematics Laboratory",
           meta: "Non-routine problem-solving",
-          body: "Non-routine problem-solving, mathematical discussion, research, mentoring and regular practice. Proposed features include themed problem areas, a resource library, technology for visualisation and monthly mock examinations. The learning sequence moves from foundation and exploration towards more advanced Olympiad preparation.",
+          topics: [
+            "Number theory",
+            "Combinatorics",
+            "Geometry",
+            "Algebra",
+            "Logic & games",
+            "Mock contests",
+          ],
+          body: "Non-routine problem-solving, mathematical discussion, research, mentoring and regular practice. The laboratory shifts focus from tools to thinking: a Problem Solving Zone posts new challenges weekly, and open-ended exploration is valued over simply reaching an answer — students are asked to find multiple methods.",
+          points: [
+            "Number theory corner: modular arithmetic, primes and Diophantine equations, using counters to simulate remainders and patterns.",
+            "Combinatorics corner: counting, probability and arrangements, with blocks, cards, spinners and coded simulations.",
+            "Geometry corner: constructions, transformations and loci, using GeoGebra, compass sets, transparent grids and mirrors.",
+            "Algebra corner: functional equations and inequalities, with algebra tiles, graphing tools and symbolic manipulators.",
+            "Logic and games corner: strategy and reasoning through tangrams, logic puzzles, chessboards and games such as Nim and the Tower of Hanoi.",
+            "A reference library of Olympiad training texts and past papers from the IMO, APMO and Sri Lankan national olympiads.",
+            "Technology for advanced exploration: GeoGebra, Desmos, WolframAlpha and simple Python or C++ workstations for testing conjectures.",
+            "Weekly problem-solving circles, small-group discussion pods with whiteboards, monthly mock contests, and workshops led by former national Olympiad participants.",
+          ],
         },
       ],
     },
@@ -1472,11 +2091,12 @@ export const courses: Course[] = [
     eyebrow: "Character, leadership and citizenship",
     tagline: "Represent yourself and your community with purpose.",
     intro: [
-      "The proposed Good Ambassadors Programme gives students a structured space to reflect on character, emotional maturity, citizenship and service. It asks not only what students can achieve, but how they respond to pressure, difference, responsibility and the freedom of digital life.",
+      "The Good Ambassadors Auditorium is not an auditorium in the usual sense. Its purpose is to propagate learning by doing things differently — nurturing character and inner greatness so that a student's journey moves from educated to enlightened, then empowered, then extraordinary.",
+      "The proposed programme gives students a structured space to reflect on character, emotional maturity, citizenship and service. It asks not only what students can achieve, but how they respond to pressure, difference, responsibility and the freedom of digital life.",
     ],
     seoTitle: "Good Ambassadors Character and Citizenship Programme",
     metaDescription:
-      "A student programme in purpose, character, emotional strength, digital citizenship, civility, service and personal standards.",
+      "A student programme in purpose, character, emotional strength, digital citizenship, civility, service and personal standards, measured by Gross Individual Happiness.",
     keywords: [
       "character development programme for students Sri Lanka",
       "student leadership programme Colombo",
@@ -1489,35 +2109,143 @@ export const courses: Course[] = [
     status: "Register your interest",
     sidebar: [
       {
+        label: "The measure of success",
+        primary: "Gross Individual Happiness",
+        secondary:
+          "The programme's ultimate indicator — success measured not only by achievement, but by goodness, wellbeing, purpose and contribution",
+      },
+      {
         label: "Format",
-        primary: "Face-to-face sessions",
+        primary: "Weekly auditorium engagements",
         secondary: "A 45–60 minute values talk plus about 30 minutes of questions, discussion and reflection",
       },
       {
         label: "Reflection & action",
         primary: "Journals, participation and action projects",
-        secondary: "Reflection on personal growth throughout",
+        secondary: "Every session closes with reflection journaling and an action habit for the week",
       },
       {
         label: "Recognition",
-        primary: "Annual ambassador recognition",
-        secondary: "May celebrate sustained contribution to school and community",
+        primary: "Good Ambassador of the Year",
+        secondary:
+          "Annual recognition, with certification signed by the Centre of Excellence, the Principal and an external panel",
       },
     ],
+    objectives: {
+      heading: "What the programme develops",
+      intro:
+        "The curriculum combines content, experience, reflection, storytelling and the examples of people who have overcome real adversity. Character multiplied by capability is the equation the programme works towards.",
+      items: [
+        "Strengthen moral identity and a clear sense of personal purpose.",
+        "Develop emotional mastery: handling setbacks, rejection and fear without giving up.",
+        "Practise gratitude, mindfulness, empathy and humility as daily habits.",
+        "Understand civility, discipline, respect and collective responsibility.",
+        "Exercise responsible freedom and considered digital citizenship.",
+        "Hold patriotism together with a genuinely global perspective.",
+        "Lead through kindness and become a confident, positive influence on others.",
+        "Represent Ananda — and Sri Lanka — honourably wherever they go.",
+      ],
+    },
     outline: {
       heading: "Ten modules",
       badges: ["Values talk + discussion", "Journals and action projects"],
       items: [
-        { title: "Goodness and purpose", meta: "Module 1" },
-        { title: "Character beyond intelligence", meta: "Module 2" },
-        { title: "Emotional strength and handling pressure", meta: "Module 3" },
-        { title: "Global ambassadorship", meta: "Module 4" },
-        { title: "Digital citizenship and responsible freedom", meta: "Module 5" },
-        { title: "The power of giving", meta: "Module 6" },
-        { title: "Civility and etiquette", meta: "Module 7" },
-        { title: "Gratitude, forgiveness and inner calm", meta: "Module 8" },
-        { title: "Identity, discipline and personal standards", meta: "Module 9" },
-        { title: "The journey towards greatness", meta: "Module 10" },
+        { title: "Goodness and purpose", step: "Module 1 of 10" },
+        { title: "Character beyond intelligence", step: "Module 2 of 10" },
+        { title: "Emotional strength and handling pressure", step: "Module 3 of 10" },
+        { title: "Global ambassadorship", step: "Module 4 of 10" },
+        { title: "Digital citizenship and responsible freedom", step: "Module 5 of 10" },
+        { title: "The power of giving", step: "Module 6 of 10" },
+        { title: "Civility and etiquette", step: "Module 7 of 10" },
+        { title: "Gratitude, forgiveness and inner calm", step: "Module 8 of 10" },
+        { title: "Identity, discipline and personal standards", step: "Module 9 of 10" },
+        {
+          title: "The greatness journey",
+          step: "Module 10 of 10",
+          body: "The closing module returns to Gross Individual Happiness as a personal compass, with measurement and reflection on how far each student has travelled.",
+        },
+      ],
+    },
+    sections: [
+      {
+        heading: "How sessions run",
+        lead: "Learning happens through reflection, dialogue and questioning rather than instruction.",
+        items: [
+          { title: "Inspirational talks and interactive conversations" },
+          { title: "Case studies and real-world examples" },
+          { title: "Motivational films and dramas" },
+          { title: "Guest speakers — local and international role models" },
+          { title: "Live sharing of adversity-to-breakthrough journeys" },
+          { title: "Reflection journaling and a weekly action habit" },
+        ],
+      },
+      {
+        heading: "Beyond the sessions",
+        lead: "Opportunities for students who want to carry the work further.",
+        items: [
+          {
+            title: "Goodness Ambassador mentoring track",
+            body: "Students who sustain the practice can mentor others coming through the programme.",
+          },
+          {
+            title: "Volunteerism and community service",
+            body: "Goodness action projects that put values to work outside the school gates.",
+          },
+          {
+            title: "National and global exposure",
+            body: "Opportunities including international exchange pathways.",
+          },
+          {
+            title: "Alumni mentorship",
+            body: "Post-school mentorship so inner development continues beyond the programme.",
+          },
+        ],
+      },
+    ],
+    admission: {
+      heading: "Assessment and certification",
+      tabs: [
+        {
+          label: "How progress is assessed",
+          items: [
+            {
+              title: "Reflection journals",
+              body: "The primary record of how a student is thinking, not only what they have attended.",
+            },
+            {
+              title: "Personal GIH growth scale",
+              body: "A personal Gross Individual Happiness scale tracked across the cycle.",
+            },
+            {
+              title: "Goodness action projects",
+              body: "Practical contributions to the school or wider community.",
+            },
+            {
+              title: "Participation and consistency",
+              body: "Sustained engagement is treated as evidence in its own right.",
+            },
+          ],
+        },
+        {
+          label: "Certification",
+          items: [
+            {
+              title: "End-of-cycle certification",
+              body: "Certificates are signed by the Centre of Excellence, the Principal and a special external panel.",
+            },
+            {
+              title: "Good Ambassador of the Year",
+              body: "Annual recognition celebrating sustained contribution to the school and the wider community.",
+            },
+          ],
+        },
+      ],
+    },
+    policy: {
+      title: "Character × Capability = Greatness",
+      body: [
+        "The programme is built on values-based education with real-world relevance, treating Gross Individual Happiness as a personal compass rather than a score. Growth mindset and goodness mindset are developed at the same time.",
+        "The intention is that this becomes a national benchmark for values-based global ambassadorship — reminding every Anandian that being a good ambassador enhances the image of the nation while helping the individual grow and flourish.",
       ],
     },
     finder: {

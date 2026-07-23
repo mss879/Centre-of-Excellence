@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# client source material — kept local, not published.
+# Contains confidential proposals and personal contact details.
+/content
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
