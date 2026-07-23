@@ -2,6 +2,7 @@
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -107,13 +108,16 @@ export default function SiteHeader() {
         }`}
       >
         <div className="container-site flex h-[72px] items-center justify-between md:h-[84px]">
-          <Link href="/" className="group flex flex-col leading-none" aria-label={site.fullName}>
-            <span className="font-display text-[1.2rem] tracking-tight text-ink md:text-[1.35rem]">
-              Centre of Excellence
-            </span>
-            <span className="mt-1 text-[0.5625rem] font-semibold uppercase tracking-[0.3em] text-maroon">
-              Ananda College
-            </span>
+          <Link href="/" className="flex items-center" aria-label={site.fullName}>
+            <Image
+              src="/textual-logo-2.png"
+              alt={site.fullName}
+              width={5328}
+              height={1220}
+              priority
+              sizes="(min-width: 768px) 200px, 165px"
+              className="h-[38px] w-auto md:h-[46px]"
+            />
           </Link>
 
           <div className="flex items-center">

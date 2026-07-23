@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/anim/Reveal";
-import ImageBanner from "@/components/sections/ImageBanner";
 import CourseCard from "@/components/sections/CourseCard";
 import CtaBand from "@/components/sections/CtaBand";
 import Accordion from "@/components/ui/Accordion";
@@ -125,8 +124,6 @@ export default async function CoursePage({ params }: Props) {
           </div>
         </div>
       </section>
-
-      <ImageBanner src={course.image} alt={course.imageAlt} priority />
 
       {/* ------------------------------------------------------------ intro + facts */}
       <section className="container-site py-20 md:py-28">
@@ -383,7 +380,7 @@ export default async function CoursePage({ params }: Props) {
                 : `${["", "One", "Two", "Three", "Four", "Five"][children.length] || children.length} connected programmes.`}
             </h2>
           </Reveal>
-          <Reveal group className="grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal group className="flex flex-col border-t border-line">
             {children.map((child) => (
               <CourseCard key={child.slug} course={child} />
             ))}

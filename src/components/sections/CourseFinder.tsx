@@ -178,7 +178,7 @@ export default function CourseFinder({ preview = false }: { preview?: boolean })
         <>
           <div
             ref={gridRef}
-            className="grid gap-x-10 gap-y-16 pt-14 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-14 flex flex-col border-t border-line"
           >
             {results.map((course) => (
               <CourseCard key={course.slug} course={course} />

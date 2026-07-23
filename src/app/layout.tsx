@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 import PreloaderProvider from "@/components/anim/PreloaderProvider";
@@ -7,17 +7,27 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { site } from "@/data/site";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  axes: ["SOFT", "WONK", "opsz"],
+/* Brand faces supplied by the client: Whyte Inktrap for titles, Inter 18pt for
+   body copy. Converted from the originals in /public to woff2 (61% smaller). */
+const title = localFont({
+  variable: "--font-title",
   display: "swap",
+  src: [
+    { path: "../fonts/WhyteInktrap-Light.woff2", weight: "300", style: "normal" },
+    { path: "../fonts/WhyteInktrap-Book.woff2", weight: "350", style: "normal" },
+    { path: "../fonts/WhyteInktrap-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/WhyteInktrap-Medium.woff2", weight: "500", style: "normal" },
+  ],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const body = localFont({
+  variable: "--font-body",
   display: "swap",
+  src: [
+    { path: "../fonts/Inter18-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/Inter18-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/Inter18-SemiBold.woff2", weight: "600", style: "normal" },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -65,7 +75,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${inter.variable} h-full antialiased`}
+      className={`${title.variable} ${body.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Script id="coe-boot" strategy="beforeInteractive">

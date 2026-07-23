@@ -30,8 +30,8 @@
   --color-line: var(--line);
   --color-line-dark: var(--line-dark);
 
-  --font-serif: var(--font-fraunces), "Georgia", serif;
-  --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-title), "Georgia", serif;
+  --font-sans: var(--font-body), "Helvetica Neue", Arial, sans-serif;
 }
 
 /* ------------------------------------------------------------------ base */
@@ -44,7 +44,7 @@
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-body), "Helvetica Neue", Arial, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.65;
   letter-spacing: -0.01em;
@@ -64,43 +64,38 @@ html.coe-loading {
 
 /* ------------------------------------------------------------------ type */
 .font-display {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-variation-settings: "SOFT" 0, "WONK" 0;
-  font-weight: 380;
+  font-family: var(--font-title), Georgia, serif;
+  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.08;
 }
 
 .display-1 {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-variation-settings: "SOFT" 0, "WONK" 0;
-  font-weight: 360;
+  font-family: var(--font-title), Georgia, serif;
+  font-weight: 350;
   font-size: clamp(2.75rem, 6.2vw, 5.25rem);
   line-height: 1.02;
   letter-spacing: -0.025em;
 }
 
 .display-2 {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-variation-settings: "SOFT" 0, "WONK" 0;
-  font-weight: 370;
+  font-family: var(--font-title), Georgia, serif;
+  font-weight: 350;
   font-size: clamp(2.125rem, 4vw, 3.5rem);
   line-height: 1.08;
   letter-spacing: -0.02em;
 }
 
 .display-3 {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-variation-settings: "SOFT" 0, "WONK" 0;
-  font-weight: 390;
+  font-family: var(--font-title), Georgia, serif;
+  font-weight: 400;
   font-size: clamp(1.5rem, 2.4vw, 2.125rem);
   line-height: 1.18;
   letter-spacing: -0.015em;
 }
 
 .display-4 {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-family: var(--font-title), Georgia, serif;
   font-weight: 400;
   font-size: clamp(1.25rem, 1.7vw, 1.5rem);
   line-height: 1.28;
@@ -108,7 +103,7 @@ html.coe-loading {
 }
 
 .eyebrow {
-  font-family: var(--font-inter), Arial, sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -315,7 +310,7 @@ html.coe-loading {
   border: 1px solid var(--line);
   border-radius: 9999px;
   font-size: 0.75rem;
-  font-weight: 550;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--body-color);
@@ -331,9 +326,8 @@ html.coe-loading {
 
 /* numbered editorial lists */
 .num-index {
-  font-family: var(--font-fraunces), Georgia, serif;
-  font-variation-settings: "SOFT" 0, "WONK" 0;
-  font-weight: 340;
+  font-family: var(--font-title), Georgia, serif;
+  font-weight: 400;
   font-size: 0.9375rem;
   color: var(--maroon);
   letter-spacing: 0.02em;
