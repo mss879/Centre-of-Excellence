@@ -1,12 +1,7 @@
-/**
- * Course pages are laid out in decision order — the sequence a family actually
- * reads in: orient, check eligibility, understand the learning, see what it
- * leads to, satisfy themselves on governance, then act.
- *
- * Blocks carry a zone so the same content can be routed to the right band
- * without the copy itself changing.
- */
-export type Zone = "qualify" | "learn" | "achieve" | "trust";
+export interface Fact {
+  label: string;
+  value: string;
+}
 
 export interface SidebarGroup {
   label: string;
@@ -20,8 +15,6 @@ export interface CourseSection {
   body?: string[];
   items?: { title: string; body?: string }[];
   numbered?: boolean;
-  /** Which band this section belongs to. Defaults to "learn". */
-  zone?: Zone;
 }
 
 export interface OutlineItem {
@@ -46,8 +39,6 @@ export interface AdmissionTab {
   label: string;
   intro?: string;
   items: { title: string; body: string }[];
-  /** Which band this tab belongs to. Defaults to "qualify". */
-  zone?: Zone;
 }
 
 export interface FinderMeta {
@@ -74,8 +65,9 @@ export interface Course {
   image: string;
   imageAlt: string;
   status?: string;
-  /** Detail groups shown in the "at a glance" band beneath the hero. */
+  /** Right-hand facts panel in the course hero. */
   sidebar?: SidebarGroup[];
+  facts?: Fact[];
   /** "Educational objectives" — boxed intro + bulleted outcomes. */
   objectives?: { heading?: string; intro?: string; items: string[] };
   /** Programme outline — accordion of phases/stages/sessions. */
@@ -332,7 +324,6 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "Proposed application pathways",
-        zone: "learn",
         lead: "In Phase 3, students specialise in domains aligned with their interests and with Sri Lanka's industry needs, then build a capstone within that field.",
         items: [
           {
@@ -363,7 +354,6 @@ export const courses: Course[] = [
       },
       {
         heading: "How the Centre teaches",
-        zone: "learn",
         lead: "The guiding philosophy is to guide, not just to teach — a deliberate shift away from rote instruction.",
         items: [
           {
@@ -390,7 +380,6 @@ export const courses: Course[] = [
       },
       {
         heading: "Partnerships and resources",
-        zone: "achieve",
         lead: "The curriculum is a living document, reviewed annually so every module uses a current tech stack.",
         items: [
           {
@@ -425,7 +414,6 @@ export const courses: Course[] = [
       tabs: [
         {
           label: "Entry requirements",
-          zone: "qualify",
           items: [
             {
               title: "Academic standing",
@@ -447,7 +435,6 @@ export const courses: Course[] = [
         },
         {
           label: "Application process",
-          zone: "qualify",
           items: [
             {
               title: "Register interest",
@@ -465,7 +452,6 @@ export const courses: Course[] = [
         },
         {
           label: "Assessment & portfolio",
-          zone: "learn",
           items: [
             {
               title: "Continuous assessment",
@@ -670,7 +656,6 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "Three core disciplines",
-        zone: "learn",
         lead: "Not every student will master all three. But an intuitive grasp of all three, early, changes how they see everything around them.",
         items: [
           {
@@ -689,7 +674,6 @@ export const courses: Course[] = [
       },
       {
         heading: "The Problem and Idea Booklet",
-        zone: "learn",
         lead: "From the first day, every student receives a booklet with one instruction.",
         body: [
           "Write down every problem you notice, no matter how small, silly, unrelated or unsolvable it seems. A door that is hard to open. A bag strap that keeps slipping. Noise in a classroom. Nothing is too trivial.",
@@ -698,7 +682,6 @@ export const courses: Course[] = [
       },
       {
         heading: "What a student gains",
-        zone: "achieve",
         items: [
           { title: "Problem-finding and creative thinking skills" },
           { title: "Confidence to act on ideas, however small" },
@@ -865,7 +848,6 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "The Anandian Way of Innovation",
-        zone: "trust",
         lead: "Every project is anchored in four pillars. Financial returns are a legitimate goal, but entrepreneurship must begin with the common good and the welfare of society at its core.",
         numbered: true,
         items: [
@@ -889,7 +871,6 @@ export const courses: Course[] = [
       },
       {
         heading: "Open to the whole school",
-        zone: "achieve",
         lead: "Alongside the selected cohort, the Centre is designed to serve every Ananda student — and, as a national model, students beyond it.",
         items: [
           {
@@ -920,7 +901,6 @@ export const courses: Course[] = [
       tabs: [
         {
           label: "Who should apply",
-          zone: "qualify",
           items: [
             {
               title: "Curiosity over credentials",
@@ -942,7 +922,6 @@ export const courses: Course[] = [
         },
         {
           label: "How selection works",
-          zone: "qualify",
           items: [
             {
               title: "Competitive selection",
@@ -1175,7 +1154,6 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "Two tracks, one module",
-        zone: "learn",
         lead: "Every module teaches the theory beneath the craft alongside the industry skill itself.",
         items: [
           {
@@ -1202,7 +1180,6 @@ export const courses: Course[] = [
       },
       {
         heading: "The course trail",
-        zone: "learn",
         lead: "A continuous pipeline that captures interest at middle school and systematically upgrades technical capacity — a micro-credential model rather than compartmentalised classrooms.",
         numbered: true,
         items: [
@@ -1226,7 +1203,6 @@ export const courses: Course[] = [
       },
       {
         heading: "Where the pathway leads",
-        zone: "achieve",
         lead: "The stacked credentials map into three specialised industry streams, each with its own course trail and portfolio evidence.",
         items: [
           {
@@ -1249,7 +1225,6 @@ export const courses: Course[] = [
       tabs: [
         {
           label: "Who it is for",
-          zone: "qualify",
           intro:
             "Each module has its own age milestone, and students may enter the pathway at the point that matches their year group.",
           items: [
@@ -1273,7 +1248,6 @@ export const courses: Course[] = [
         },
         {
           label: "Assessment & certification",
-          zone: "achieve",
           items: [
             {
               title: "Portfolio over examination",
@@ -1420,7 +1394,6 @@ export const courses: Course[] = [
       tabs: [
         {
           label: "How work is assessed",
-          zone: "learn",
           intro:
             "Assessment is continuous, formative and portfolio-based, reflecting the developmental nature of artistic skill-building.",
           items: [
@@ -1448,7 +1421,6 @@ export const courses: Course[] = [
         },
         {
           label: "Certification",
-          zone: "achieve",
           items: [
             {
               title: "Module and level certificates",
@@ -1470,7 +1442,6 @@ export const courses: Course[] = [
         },
         {
           label: "Where it leads",
-          zone: "achieve",
           items: [
             {
               title: "Internships",
@@ -1495,7 +1466,6 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "Three streams",
-        zone: "learn",
         lead: "Students may specialise in either stream, or pursue an integrated pathway combining both.",
         items: [
           {
@@ -1514,7 +1484,6 @@ export const courses: Course[] = [
       },
       {
         heading: "How the centre runs",
-        zone: "learn",
         lead: "A blended approach combining instructor-led studio sessions with self-paced modules and independent practice.",
         items: [
           {
@@ -1713,7 +1682,6 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "How science is taught here",
-        zone: "learn",
         lead: "Four approaches run through every proposed pathway.",
         items: [
           {
@@ -1736,7 +1704,6 @@ export const courses: Course[] = [
       },
       {
         heading: "Three strands",
-        zone: "learn",
         lead: "The proposed curriculum spirals across three strands from junior concepts through to professional integrity.",
         numbered: true,
         items: [
@@ -1940,7 +1907,6 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "Five core strands",
-        zone: "learn",
         lead: "A field-to-fork learning pathway running from Grade 6 through to A/L.",
         numbered: true,
         items: [
@@ -1968,7 +1934,6 @@ export const courses: Course[] = [
       },
       {
         heading: "Engineering and policy",
-        zone: "learn",
         lead: "For older students, the pathway moves towards design and the decisions that shape food systems.",
         items: [
           {
@@ -2024,7 +1989,6 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "Culture before contests",
-        zone: "learn",
         lead: "The spirit of the laboratory matters more than its equipment.",
         items: [
           { title: "Persistence and curiosity are valued over speed." },
@@ -2205,7 +2169,6 @@ export const courses: Course[] = [
     sections: [
       {
         heading: "How sessions run",
-        zone: "learn",
         lead: "Learning happens through reflection, dialogue and questioning rather than instruction.",
         items: [
           { title: "Inspirational talks and interactive conversations" },
@@ -2218,7 +2181,6 @@ export const courses: Course[] = [
       },
       {
         heading: "Beyond the sessions",
-        zone: "achieve",
         lead: "Opportunities for students who want to carry the work further.",
         items: [
           {
@@ -2245,7 +2207,6 @@ export const courses: Course[] = [
       tabs: [
         {
           label: "How progress is assessed",
-          zone: "learn",
           items: [
             {
               title: "Reflection journals",
@@ -2267,7 +2228,6 @@ export const courses: Course[] = [
         },
         {
           label: "Certification",
-          zone: "achieve",
           items: [
             {
               title: "End-of-cycle certification",
